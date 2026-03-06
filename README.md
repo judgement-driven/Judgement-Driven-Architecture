@@ -399,6 +399,8 @@ JDAの長期的な目的は
 
 ## ライセンス
 
+Copyright (c) 2026 Shun Takeda（B-AS）
+
 本プロジェクトは **Creative Commons Attribution 4.0 International License（CC BY 4.0）** のもとで公開されています。
 
 利用者は以下が可能です。
@@ -415,3 +417,25 @@ JDAの長期的な目的は
 ライセンス全文：
 
 https://creativecommons.org/licenses/by/4.0/
+
+## 引用
+
+本理論を研究・記事・資料等で利用する場合は、以下の形で引用してください。
+
+Judgement-Driven Architecture（判断ドリブンアーキテクチャ）
+著者：武田 俊（B-AS）
+GitHub Repository
+https://github.com/judgement-driven/Judgement-Driven-Architecture
+
+### BibTeX
+
+```bibtex
+@misc{JDA2026,
+  title={Judgement-Driven Architecture},
+  author={Takeda, Shun},
+  year={2026},
+  howpublished={GitHub Repository},
+  organization={B-AS},
+  url={https://github.com/judgement-driven/Judgement-Driven-Architecture}
+}
+```
