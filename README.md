@@ -1,8 +1,10 @@
 # Judgement-Driven Architecture（判断ドリブンアーキテクチャ）
 
 > This repository contains the **original Japanese version** of the  
-> Judgement-Driven Architecture (JDA) theory.  
-> An English version will be published separately.
+> Judgement-Driven Architecture (JDA) theory.
+
+> English version:  
+> https://github.com/judgement-driven/Judgement-Driven-Architecture-EN
 
 > **判断を残す。組織が賢くなる。**
 > **企業はデータではなく「判断」で動いている。**
