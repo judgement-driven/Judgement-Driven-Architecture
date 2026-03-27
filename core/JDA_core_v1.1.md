@@ -281,3 +281,11 @@ JDAは
 ことで
 
 企業の意思決定能力を進化させるアーキテクチャである。
+
+## License & Citation
+
+Copyright (c) 2026 Shun Takeda（B-AS）  
+CC BY 4.0 — <https://creativecommons.org/licenses/by/4.0/>
+
+引用：Takeda, Shun. Judgement-Driven Architecture. B-AS, 2026.  
+<https://github.com/judgement-driven/Judgement-Driven-Architecture>
