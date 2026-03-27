@@ -106,11 +106,15 @@ JDAは、企業活動に存在する判断を抽出し、評価し、ログ化�
 
 ## JDA v1.1 三層構造
 
-Discovery（判断の発見）  
-↓  
-Investment（判断の評価）  
-↓  
-Learning（判断の学習）
+```mermaid
+flowchart LR
+    D[Discovery\n判断の発見]
+    I[Investment\n判断の評価]
+    L[Learning\n判断の学習]
+
+    D --> I --> L
+    L --> D
+```
 
 ---
 
