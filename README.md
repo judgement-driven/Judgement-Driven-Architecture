@@ -224,6 +224,13 @@ AIが判断を支援し、学習できる構造を設計する理論である。
 
 ---
 
+## Tools
+
+- [`tools/jda_phase_template.html`](tools/jda_phase_template.html)
+- JDAの進行状況を管理するフェーズ・ドキュメント対応表（ブラウザで開いて使用）
+
+---
+
 ## ライセンス
 
 Copyright (c) 2026 Shun Takeda（B-AS）

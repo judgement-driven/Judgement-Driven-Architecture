@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JDA フェーズ・ドキュメント対応表</title>
+<style>
+:root {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --surface2: #f0efe9;
+  --border: #e0ddd4;
+  --text: #1c1c1a;
+  --text-sec: #68675f;
+  --text-ter: #9e9d95;
+  --done-bg: #eaf3de;
+  --done-text: #27500a;
+  --done-border: #639922;
+  --current-bg: #e6f1fb;
+  --current-text: #0c447c;
+  --current-border: #185fa5;
+  --p0: #534ab7; --p0-bg: #eeedfe;
+  --p1: #185fa5; --p1-bg: #e6f1fb;
+  --p2: #0f6e56; --p2-bg: #e1f5ee;
+  --p3: #854f0b; --p3-bg: #faeeda;
+  --p4: #993c1d; --p4-bg: #faece7;
+  --p5: #3b6d11; --p5-bg: #eaf3de;
+  --p6: #5f5e5a; --p6-bg: #f1efe8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #181816;
+    --surface: #222220;
+    --surface2: #2a2a28;
+    --border: #383834;
+    --text: #e8e7df;
+    --text-sec: #9e9d95;
+    --text-ter: #68675f;
+    --done-bg: #173404;
+    --done-text: #97c459;
+    --done-border: #3b6d11;
+    --current-bg: #042c53;
+    --current-text: #85b7eb;
+    --current-border: #378add;
+    --p0: #afa9ec; --p0-bg: #26215c;
+    --p1: #85b7eb; --p1-bg: #042c53;
+    --p2: #5dcaa5; --p2-bg: #04342c;
+    --p3: #ef9f27; --p3-bg: #412402;
+    --p4: #f0997b; --p4-bg: #4a1b0c;
+    --p5: #97c459; --p5-bg: #173404;
+    --p6: #b4b2a9; --p6-bg: #2c2c2a;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 24px 16px 48px;
+}
+h1 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.subtitle {
+  font-size: 12px;
+  color: var(--text-ter);
+  margin-bottom: 20px;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ctrl-group label {
+  font-size: 11px;
+  color: var(--text-sec);
+  white-space: nowrap;
+  font-weight: 500;
+}
+.ctrl-group input, .ctrl-group select {
+  font-size: 12px;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface2);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.ctrl-group input:focus, .ctrl-group select:focus {
+  border-color: var(--current-border);
+}
+.ctrl-group input { width: 200px; }
+
+/* テーブル */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  min-width: 700px;
+}
+thead th {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-sec);
+  text-align: left;
+  padding: 0 12px 6px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+tbody tr {
+  background: var(--surface);
+  border-radius: 10px;
+  transition: box-shadow 0.15s;
+}
+tbody tr:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+tbody tr.is-done td:first-child { border-left: 3px solid var(--done-border); }
+tbody tr.is-current td:first-child { border-left: 3px solid var(--current-border); }
+tbody tr td:first-child { border-radius: 10px 0 0 10px; }
+tbody tr td:last-child { border-radius: 0 10px 10px 0; }
+td {
+  padding: 12px 14px;
+  vertical-align: top;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+td:first-child { border-left: 3px solid transparent; }
+td:last-child { border-right: 1px solid var(--border); }
+
+/* フェーズバッジ */
+.phase-cell { min-width: 130px; }
+.phase-badge {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.phase-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.phase-sub {
+  font-size: 11px;
+  font-weight: 500;
+}
+.phase-status {
+  margin-top: 5px;
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: inline-block;
+  font-weight: 600;
+}
+.status-done { background: var(--done-bg); color: var(--done-text); }
+.status-current { background: var(--current-bg); color: var(--current-text); }
+
+/* ファイルリスト */
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.file-tag {
+  font-size: 11px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  padding: 3px 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text-sec);
+  white-space: nowrap;
+  display: inline-block;
+  transition: color 0.15s;
+}
+.file-tag.highlight { color: var(--text); border-color: var(--current-border); }
+.file-tag.done { color: var(--done-text); background: var(--done-bg); border-color: var(--done-border); }
+
+/* 成果物リスト */
+.output-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.output-item {
+  font-size: 12px;
+  color: var(--text-sec);
+  padding-left: 12px;
+  position: relative;
+}
+.output-item::before {
+  content: '·';
+  position: absolute;
+  left: 2px;
+  color: var(--text-ter);
+}
+.output-item.highlight { color: var(--text); }
+.output-item.done { color: var(--done-text); }
+
+/* ループ注記 */
+.loop-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-ter);
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+/* フッター */
+footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-ter);
+}
+</style>
+</head>
+<body>
+
+<h1>JDA フェーズ・ドキュメント対応表</h1>
+<p class="subtitle">Judgement-Driven Architecture v1.2 — Phase &amp; Document Map</p>
+
+<div class="controls">
+  <div class="ctrl-group">
+    <label>企業名</label>
+    <input id="company" placeholder="[Company Name]" oninput="render()">
+  </div>
+  <div class="ctrl-group">
+    <label>対象BJ</label>
+    <input id="target-bj" placeholder="[BJ01 業務名]" oninput="render()">
+  </div>
+  <div class="ctrl-group">
+    <label>現在地</label>
+    <select id="current-phase" onchange="render()">
+      <option value="-1">— 未開始 —</option>
+      <option value="0">Phase0 Foundation</option>
+      <option value="1">Phase1 Discovery</option>
+      <option value="2">Phase2 JULIA</option>
+      <option value="3">Phase3 Design</option>
+      <option value="4">Phase4 Log</option>
+      <option value="5">Phase5 Implementation</option>
+      <option value="6">Phase6 Learning</option>
+    </select>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table id="main-table">
+    <thead>
+      <tr>
+        <th style="width:140px">フェーズ</th>
+        <th style="width:200px">method ドキュメント</th>
+        <th style="width:220px">examples ドキュメント</th>
+        <th>主な成果物</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<div class="loop-note">↻ Phase6 完了後 → 次の JP で Phase1 へ戻る（循環するアーキテクチャ）</div>
+
+<footer>
+  JDA Method v1.2 &nbsp;·&nbsp; Copyright (c) 2026 Shun Takeda (B-AS) &nbsp;·&nbsp;
+  <a href="https://github.com/judgement-driven/Judgement-Driven-Architecture" style="color:inherit">GitHub</a>
+</footer>
+
+<script>
+const PHASES = [
+  {
+    id: 0,
+    label: 'Phase0',
+    sub: 'Foundation',
+    color: 'var(--p0)',
+    colorBg: 'var(--p0-bg)',
+    method: [
+      '00_overview.md',
+      '01_phase0_foundation.md',
+      'bmc/JDA_BMC_definition.md'
+    ],
+    examplesFn: (co, bj) => [
+      `${co}/0_JDA_BMC.md`,
+      `${co}/0_Businiess_Journey_list.md`,
+    ],
+    outputs: [
+      'JDA-BMC（判断ドメイン定義）',
+      'Business Journey 一覧',
+      '対象 BJ（1つ）',
+    ]
+  },
+  {
+    id: 1,
+    label: 'Phase1',
+    sub: 'Discovery',
+    color: 'var(--p1)',
+    colorBg: 'var(--p1-bg)',
+    method: ['02_phase1_discovery.md'],
+    examplesFn: (co, bj) => [
+      `${co}/1_${bj}_Discovery.md`,
+    ],
+    outputs: [
+      '顧客×企業ジャーニー図',
+      'JP 一覧（10個〜）',
+      'JJ（導出）',
+    ]
+  },
+  {
+    id: 2,
+    label: 'Phase2',
+    sub: 'JULIA',
+    color: 'var(--p2)',
+    colorBg: 'var(--p2-bg)',
+    method: ['03_phase2_julia.md'],
+    examplesFn: (co, bj) => [
+      `${co}/2_JULIA.md`,
+    ],
+    outputs: [
+      'JULIA 評価表',
+      '優先 JP（Top1）',
+    ]
+  },
+  {
+    id: 3,
+    label: 'Phase3',
+    sub: 'Design',
+    color: 'var(--p3)',
+    colorBg: 'var(--p3-bg)',
+    method: ['04_phase3_design.md'],
+    examplesFn: (co, bj) => [
+      `${co}/3_JSC.md`,
+      `${co}/3_JDC.md`,
+    ],
+    outputs: [
+      'JSC（判断状態遷移）',
+      'JDC（判断設計）',
+    ]
+  },
+  {
+    id: 4,
+    label: 'Phase4',
+    sub: 'Log',
+    color: 'var(--p4)',
+    colorBg: 'var(--p4-bg)',
+    method: ['05_phase4_log.md'],
+    examplesFn: (co, bj) => [
+      `${co}/4_JLog_definition.md`,
+      `${co}/4_VLog_definition.md`,
+    ],
+    outputs: [
+      'JLog 定義',
+      'VLog 定義',
+      '記録タイミング定義',
+    ]
+  },
+  {
+    id: 5,
+    label: 'Phase5',
+    sub: 'Implementation',
+    color: 'var(--p5)',
+    colorBg: 'var(--p5-bg)',
+    method: ['06_phase5_implementation.md'],
+    examplesFn: (co, bj) => [
+      `${co}/5_implementation.md`,
+    ],
+    outputs: [
+      'DB スキーマ',
+      'UI（入力・確認画面）',
+      'AI 連携設計',
+    ]
+  },
+  {
+    id: 6,
+    label: 'Phase6',
+    sub: 'Learning',
+    color: 'var(--p6)',
+    colorBg: 'var(--p6-bg)',
+    method: ['07_phase6_learning.md'],
+    examplesFn: (co, bj) => [
+      `${co}/6_learning.md`,
+    ],
+    outputs: [
+      'VLog 分析・判断傾向レポート',
+      '更新された判断基準',
+      '次対象 JP',
+    ]
+  },
+];
+
+function render() {
+  const company = document.getElementById('company').value.trim() || '[Company]';
+  const bj = document.getElementById('target-bj').value.trim().replace(/\s+/g, '_') || '[BJxx]';
+  const current = parseInt(document.getElementById('current-phase').value);
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+
+  PHASES.forEach(p => {
+    const isDone = p.id < current;
+    const isCurrent = p.id === current;
+    const tr = document.createElement('tr');
+    if (isDone) tr.className = 'is-done';
+    if (isCurrent) tr.className = 'is-current';
+
+    // フェーズ列
+    let statusHtml = '';
+    if (isDone) statusHtml = `<span class="phase-status status-done">✓ 完了</span>`;
+    if (isCurrent) statusHtml = `<span class="phase-status status-current">← 今ここ</span>`;
+
+    // method列
+    const methodHtml = p.method.map(f =>
+      `<span class="file-tag ${isCurrent ? 'highlight' : isDone ? 'done' : ''}">${f}</span>`
+    ).join('');
+
+    // examples列
+    const exFiles = p.examplesFn(company, bj);
+    const exHtml = exFiles.map(f =>
+      `<span class="file-tag ${isCurrent ? 'highlight' : isDone ? 'done' : ''}">${f}</span>`
+    ).join('');
+
+    // 成果物列
+    const outHtml = p.outputs.map(o =>
+      `<div class="output-item ${isCurrent ? 'highlight' : isDone ? 'done' : ''}">${o}</div>`
+    ).join('');
+
+    tr.innerHTML = `
+      <td class="phase-cell">
+        <div class="phase-badge">
+          <span class="phase-name" style="color:${p.color}">${p.label}</span>
+          <span class="phase-sub" style="color:${p.color}">${p.sub}</span>
+        </div>
+        ${statusHtml}
+      </td>
+      <td><div class="file-list">${methodHtml}</div></td>
+      <td><div class="file-list">${exHtml}</div></td>
+      <td><div class="output-list">${outHtml}</div></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+render();
+</script>
+</body>
+</html>
