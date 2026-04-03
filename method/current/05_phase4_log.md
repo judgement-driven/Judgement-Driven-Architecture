@@ -1,4 +1,4 @@
-# JDA Method v1.1 — Phase4 Log
+# JDA Method v1.2 — Phase4 Log
 
 ## 1. 本フェーズの目的
 
