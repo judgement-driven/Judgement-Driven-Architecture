@@ -1,4 +1,4 @@
-# JDA Method v1.3 — Phase3 Design
+# JDA Method v1.2 — Phase3 Design
 
 ## 1. 本フェーズの目的
 
@@ -376,14 +376,3 @@ AI化できるかの境界
 → phase4 log（ログ設計）
 
 に進む。
-
-## 15. v1.3追加概念（補足）
-
-本フェーズでは、設計対象となる判断構造は  
-実装段階において以下の形式で具体化される。
-
-- Case = Entity × Context  
-- JPは trigger_state / decision_options / transition_map を持つ構造として定義される  
-
-これにより、JSCおよびJDCで設計された内容は、  
-状態遷移モデルとして実装可能な粒度に変換される。

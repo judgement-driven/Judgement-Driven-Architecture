@@ -25,32 +25,39 @@ Judgement Driven Architecture（JDA）は、
 JDAは以下のフェーズで構成される。
 
 ### phase0 foundation
+
 ・業務と判断ドメインの整理  
 ・Business Journey（BJ）の抽出  
 
 ### phase1 discovery
+
 ・BJを判断視点で再解釈  
 ・Judgement Point（JP）の抽出  
 ・Judgement Journey（JJ）の把握  
 
 ### phase2 julia
+
 ・JPの評価  
 ・優先順位付け  
 ・投資判断  
 
 ### phase3 design
+
 ・判断構造の設計（JSC）  
 ・判断委譲の設計（JDC）  
 
 ### phase4 log
+
 ・判断ログ設計  
 ・学習ログ設計  
 
 ### phase5 implementation
+
 ・システム実装  
 ・運用設計  
 
 ### phase6 learning
+
 ・ログを用いた学習  
 ・判断精度の改善  
 ・循環の継続  
@@ -80,12 +87,15 @@ Learning
 ## 5. 判断構造
 
 ### Business Journey（BJ）
+
 業務単位のまとまり  
 
 ### Judgement Journey（JJ）
+
 判断単位の連鎖  
 
 ### Judgement Point（JP）
+
 最小単位の判断  
 「〜するか？」の形式  
 顧客状態 × 企業行動の交点で発生する  
@@ -116,15 +126,19 @@ JDAは判断を構造化し、学習可能にするアーキテクチャであ�
 ## 8. 進め方の原則
 
 ### 8.1 いきなり全体最適を狙わない
+
 - 1つのJourneyから開始する  
 
 ### 8.2 作業ではなく判断を見る
+
 - フローではなく判断を対象とする  
 
 ### 8.3 正解を求めない
+
 - 判断を抽出することが目的  
 
 ### 8.4 作りながら学習する
+
 - 小さく作り、早く検証する  
 - 完成してから使わない  
 
@@ -133,7 +147,7 @@ JDAは判断を構造化し、学習可能にするアーキテクチャであ�
 ## 9. 本Methodの位置づけ
 
 | 分野 | 対象 |
-|------|------|
+| ------ | ------ |
 | BPM | 業務フロー |
 | BI | データ |
 | AI | モデル |

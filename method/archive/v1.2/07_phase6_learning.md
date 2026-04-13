@@ -1,4 +1,4 @@
-# JDA Method v1.3 — Phase6 Learning
+# JDA Method v1.2 — Phase6 Learning
 
 ## 1. 本フェーズの目的
 
@@ -295,29 +295,3 @@ JDAは、
 ```
 
 である。
-
-## 14. v1.3追加概念（補足）
-
-本フェーズでは、JLogとVLogの差分をもとに、
-
-- Condition  
-- Perspective  
-- Decision Criteria  
-
-を更新する。
-
-これにより、JPの以下の構造が更新される。
-
-- trigger_state  
-- decision_options  
-- transition_map  
-
-すなわち、
-
-```text
-遷移関数自体が学習対象となる
-```
-
-この更新は非同期で行われ、  
-実行中のCaseには適用されず、  
-次のCase生成時から有効となる。

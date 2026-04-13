@@ -1,4 +1,4 @@
-# JDA Method v1.3 — Phase4 Log
+# JDA Method v1.2 — Phase4 Log
 
 ## 1. 本フェーズの目的
 
@@ -248,23 +248,3 @@ JLog・VLogは、
 - AI入力データ
 
 として実装される。
-
-## 11. v1.3追加概念（補足）
-
-本フェーズで設計するログは、  
-v1.3において以下の構造と接続される。
-
-- StateはCaseに紐づく履歴として管理される  
-- JLogはState遷移の根拠として紐づく  
-- VLogは遷移結果の妥当性評価として機能する  
-
-これにより、
-
-```text
-State Change ← JLog ← Judgement
-↓
-VLog（評価）
-```
-
-の構造が成立し、  
-判断が学習可能な状態となる。
