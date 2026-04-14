@@ -7,6 +7,16 @@ Phase2 JULIAは、Phase1で抽出したJudgement Point（JP）を評価し、
 
 ---
 
+### 1.1 JULIAの役割の拡張（※追記）
+
+本フェーズは単なる優先順位付けではなく、
+以下の2つを分離して定義する工程である。
+
+・設計優先度：どのJPをPhase3で設計するか
+・ログ観測優先度：どのJPのログを重点的に取得するか
+
+---
+
 ## 2. JULIAとは何か
 
 JULIA（Judgement Log Impact Assessment）は、
@@ -189,7 +199,7 @@ Top1〜Top3
 ## 10. 例（入金消込）
 
 | JP名 | ROI | Impact | Auto | Learning | 優先度 |
-|------|-----|--------|------|----------|--------|
+| ------ | ----- | -------- | ------ | ---------- | -------- |
 | 入金紐付け | High | High | High | High | Top1 |
 | 差額許容 | Medium | High | Medium | High | Top2 |
 | 保留判断 | Low | Medium | Low | Medium | Top3 |
@@ -225,7 +235,7 @@ Top1〜Top3
 JULIAの評価結果は、以下の形式で記録する。
 
 | JP名 | ROI | Impact | Auto | Learning | 優先度 |
-|------|-----|--------|------|----------|--------|
+| ------ | ----- | -------- | ------ | ---------- | -------- |
 | 入金紐付け | H | H | H | H | Top1 |
 | 差額許容 | M | H | M | H | Top2 |
 | 保留判断 | L | M | L | M | Top3 |
