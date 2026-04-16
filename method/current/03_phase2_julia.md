@@ -1,4 +1,4 @@
-# JDA Method v1.2 — Phase2 JULIA
+# JDA Method v1.4 — Phase2 JULIA
 
 ## 1. 本フェーズの目的
 
@@ -189,10 +189,30 @@ Judgement ROI =
 Top1〜Top3
 ```
 
----
-
 > すべてやらない  
 > **最初の1つを決めることが重要**
+
+---
+
+### 9.3 Implementationとの関係
+
+JULIAはJP（Judgement Point）単位で評価を行い、
+優先的に投資すべき判断を選定する。
+
+一方、Implementation（Phase5）は、
+選定されたJP単体ではなく、
+その判断が属するBJ（Business Journey）単位で実装を行う。
+
+これは、判断は単独では成立せず、
+前後の判断と連鎖することで初めて実行可能となるためである。
+
+したがって、
+
+- JULIAは主役となるJPを選定し
+- ImplementationではそのJPを中心として
+  必要な周辺JPを含めてBJ単位で実装する
+
+という関係となる。
 
 ---
 
