@@ -48,6 +48,8 @@ JDA版ハーネスエンジニアリングとは、
 > 再現可能かつ学習可能な形で実行するために、
 > 状態・入力・実行・ログを統一する実装基盤を設計することである。
 
+本ハーネスは**Judgement Injection**を前提とする。
+
 ---
 
 ### 4.2 目的
@@ -75,17 +77,52 @@ JPを共通基盤で実行
 
 ---
 
+### 4.4 Judgement Injection
+
+**定義**
+
+Judgement Injectionとは、
+
+> 状態遷移を伴う判断（JP）を、共通実行基盤（ハーネス）に対して
+> 外部定義として注入し、実行可能な形で組み込む実装方式
+
+である。
+
+**従来との違い**
+
+```python
+# Before（Service Locator的）
+def execute_jp(case_id, jp_id, input_data):
+    jp = load_jp(jp_id)  # ハーネスが取りに行く
+    jp.execute()
+
+# After（Injection）
+jp = resolve_jp(case, context)  # 外部で解決
+execute_jp(case, jp, input_data)  # 渡す
+```
+
+**ポイント**
+
+- JPはハーネスが「取りに行く」ものではない
+- JPは外部から「渡される」もの
+- ハーネスは実行に専念する
+- 判断構造と実行構造が分離される
+
+**メリット**
+
+- JP定義がコードから分離される
+- JP追加がハーネスを触らずにできる
+- 将来のJSON定義・DB定義への移行が自然になる
+- Learning LoopによるJP更新がハーネスに影響しない
+
+---
+
 ## 5. 実行モデル
 
 ### 5.1 実行単位
 
-判断の実行単位はCaseではなく、
-
-```
-Case × Context = Proposal
-```
-
-である。
+判断の実行単位はCaseを具体化したインスタンスであり、
+本実装ではこれを**Proposal**として扱う。
 
 ---
 
@@ -117,9 +154,14 @@ StateはProposalに紐づく。
 ### 6.1 実行関数
 
 ```python
-def execute_jp(case_id, proposal_id, jp_id, input_data, actor):
+# 呼び出し側：JPを外部で解決して渡す
+jp = resolve_jp(proposal, context)
+execute_jp(proposal, jp, input_data, actor)
+
+# ハーネス定義：JPを受け取って実行する
+def execute_jp(proposal, jp, input_data, actor):
     # 1. state取得（state_versionで楽観ロック）
-    # 2. JP定義に従って判断実行
+    # 2. jpに従って判断実行（外部注入済み）
     # 3. state遷移
     # 4. JLog保存
     # 5. 結果返却
@@ -131,11 +173,13 @@ def execute_jp(case_id, proposal_id, jp_id, input_data, actor):
 ### 6.2 処理フロー
 
 ```text
-1. state取得
-2. JP定義に従って判断実行
-3. state遷移
-4. JLog保存
-5. 結果返却
+1. resolve_jp（JPを外部で解決）
+2. execute_jp（JPを渡して実行）
+3. state取得
+4. jpに従って判断実行
+5. state遷移
+6. JLog保存
+7. 結果返却
 ```
 
 ---
@@ -143,6 +187,7 @@ def execute_jp(case_id, proposal_id, jp_id, input_data, actor):
 ### 6.3 設計ポイント
 
 - JPはコードではなく**定義**として管理する
+- JPはハーネスが取りに行かず、外部から渡される
 - 実行ロジックは共通化する
 - 状態遷移はJPに依存する
 
@@ -196,7 +241,7 @@ UIはハーネスを呼び出すだけ
 
 ## 9. AIの役割
 
-AIは判断を実行しない。
+現時点ではAIは判断を実行しない。
 
 役割は以下。
 
@@ -261,4 +306,4 @@ AIは判断を実行しない。
 | Version | 内容 |
 |---------|------|
 | v1.3 | 初版 |
-| v1.4 | JDA版ハーネスエンジニアリングの導入 / 実行単位をProposalに変更 / execute_jp共通基盤の定義 |
+| v1.4 | JDA版ハーネスエンジニアリングの導入 / 実行単位をProposalに変更 / execute_jp共通基盤の定義 / Judgement Injection概念追加 |
