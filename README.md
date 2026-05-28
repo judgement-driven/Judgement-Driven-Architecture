@@ -1,7 +1,7 @@
 # Judgement-Driven Architecture（判断ドリブンアーキテクチャ）
 
 > This repository contains the original Japanese version of the  
-> Judgement-Driven Architecture (JDA) theory.
+> Judgement-Driven Architecture（JDA） theory and method.
 >
 > English version:  
 > <https://github.com/judgement-driven/Judgement-Driven-Architecture-EN>
@@ -13,46 +13,50 @@
 
 ## One-line definition
 
-JDAは、企業活動に存在する判断を抽出し、評価し、ログ化し、学習することで、企業の意思決定能力を進化させるアーキテクチャである。
+JDA（Judgement-Driven Architecture）は、企業活動に存在する判断を抽出・設計・実行・記録・評価・学習することで、組織の意思決定能力を継続的に進化させるアーキテクチャである。
 
 ---
 
-## なぜこの理論を考えたのか
+## なぜJDAを考えたのか
 
-多くの業務はフローとして記述される。
+多くの業務は、業務フローとして記述される。
 
 しかし実際の仕事は、そのフローの通りにきれいには流れない。
 
-実際の仕事は、都度「判断」によって流れが変わる。
+実際の仕事は、都度発生する「判断」によって流れが変わる。
 
-- この案件を進めるか  
-- この例外を許容するか  
-- どちらを優先するか  
+- この案件を進めるか
+- この企業を対象にするか
+- この例外を許容するか
+- どちらを優先するか
+- ここで保留するか
+- 誰に確認するか
 
-業務はこうした判断の積み重ねで進んでいる。
+業務は、こうした判断の積み重ねで進んでいる。
 
-しかしその判断は
+しかし多くの組織では、その判断が次のような状態になっている。
 
-- 属人化している  
-- 判断理由が残らない  
-- 妥当性が検証されない  
-- AIが扱えない  
-
-という状態が一般的である。
+- 属人化している
+- 判断理由が残らない
+- 判断材料が共有されない
+- 妥当性が検証されない
+- AIが学習できない
 
 企業にはすでに多くのデータが存在する。
 
-事実データ
+事実データ：
 
-- 売上  
-- 受発注情報  
-- 部品情報  
+- 売上
+- 受発注情報
+- 顧客情報
+- 請求情報
 
-行動データ
+行動データ：
 
-- クリック  
-- 閲覧  
-- 購買  
+- クリック
+- 閲覧
+- 購買
+- 接触履歴
 
 しかし企業活動には、もう一つ重要なデータがある。
 
@@ -60,205 +64,599 @@ JDAは、企業活動に存在する判断を抽出し、評価し、ログ化�
 
 である。
 
-さらにAI時代では、AIモデルはコモディティ化する。
+AI時代において、AIモデルはコモディティ化していく。
 
-競争力は
+競争力は、
 
-- どのAIを使うかではなく  
-- 何を学習させるか  
+- どのAIを使うか
 
-になる。
+ではなく、
+
+- 何を学習させるか
+- どの判断を記録しているか
+- どの判断材料を改善できるか
+
+に移っていく。
+
+JDAは、その判断データを組織の学習資産に変えるためのアーキテクチャである。
 
 ---
 
 ## 判断の定義
 
-判断とは状態を確定させる行為である。
+JDAにおいて、判断とは、
 
-判断には4つの側面がある。
+> 状態を確定させる行為
 
-- Proceed（進行）  
-- Validity（妥当性）  
-- Accountability（責任）  
-- Venture（冒険）  
+である。
 
----
+判断は、単なるif分岐ではない。
 
-## Venture判断
+判断は、業務上の状態を変え、次の行動や次の判断を決める。
 
-非連続な価値を生むためにリスクを取る判断。
+```text
+状態A
+↓
+判断
+↓
+状態B
+```
 
-既存事業の延長でも、主流から外れ非連続価値を生めばVenture。
+JDAでは、判断を以下の4側面から扱う。
 
-例：
-
-- Amazon：AWS  
-- Nintendo：Switch  
-- トヨタ：プリウス  
+- Proceed（進行）
+- Validity（妥当性）
+- Accountability（責任）
+- Venture（探索性）
 
 ---
 
 ## JDAとは何か
 
-判断を学習単位として構造化する設計理論。
+JDAは、判断を第一級の設計対象として扱うアーキテクチャである。
 
----
+JDAでは、業務を単なるプロセスやタスクの集合として見ない。
 
-## JDA v1.1 三層構造
+業務の中に存在する判断を抽出し、その判断を次のように扱う。
 
-```mermaid
-flowchart LR
-    D[Discovery\n判断の発見]
-    I[Investment\n判断の評価]
-    L[Learning\n判断の学習]
-
-    D --> I --> L
-    L --> D
+```text
+発見する
+↓
+評価する
+↓
+設計する
+↓
+記録する
+↓
+実行する
+↓
+学習する
 ```
 
----
+JDAの目的は、AIにいきなり判断を任せることではない。
 
-## フェーズ概要
+まず、人間がどこで判断しているかを明らかにする。
 
-JDAは以下のフェーズで設計と実装を進める。
+次に、その判断に必要な材料を整理する。
 
-### フェーズ0：判断の土台を整える
+そして、判断結果・判断理由・判断材料・状態遷移をログとして残す。
 
-- 業務理解（Hearing）
-- 判断ドメイン境界の定義
-- JDA-BMCによる対象領域の絞り込み
-- 改善しない
-- ToBeを描かない
+そのうえで、AIは判断材料の生成や整理を支援する。
 
-### フェーズ1：判断構造の発見（Discovery）
-
-- Judgement Chainの把握
-- Judgement Journeyの抽出
-- Judgement Point（JP）の列挙
-
-### フェーズ2：影響評価（JULIA）
-
-- Judgement ROIの概算
-- 影響度の評価
-- 優先順位の決定
-
-### フェーズ3：判断設計
-
-- JSC（状態遷移の設計）
-- JDC（判断設計の定義）
-
-### フェーズ4：ログ設計
-
-- 判断材料
-- 判断選択肢
-- 判断結果
-- 判断理由
-- 妥当性評価
-
-### フェーズ5：実装
-
-- DB / JSON設計
-- UI設計
-- ワークフロー統合
-- AI接続
-
-### フェーズ6：学習
-
-- 妥当性レビュー
-- 判断傾向分析
-- Venture振り返り
-- 判断基準の更新
+JLog / VLog が蓄積されることで、AIは過去判断を再現し、将来的には一部判断を委譲できる可能性が生まれる。
 
 ---
 
-## Judgement ROI
+## JDAの基本構造
 
-Judgement ROI  
-= 判断頻度 × 判断影響額 × 判断品質改善率 − 導入コスト
+JDA v1.6では、Business Journey（BJ）をスコープとしてJudgement Point（JP）を発見し、そのJPを設計・記録・実行・学習の中心単位として扱う。
+
+```text
+BJ（発見スコープ）→ JP（判断点）
+JP → JSC / JDC（設計）
+JP → JLog / VLog（記録）
+JP → Learning Cycle（学習）
+```
+
+この構造により、JDAは業務フローそのものではなく、業務の中にある判断を継続的に改善する。
 
 ---
 
-## JULIA
+## Business Journey（BJ）
 
-Judgement Log Impact Assessment
+Business Journey（BJ）は、判断を内包する業務の意味単位である。
 
-判断ログの影響を評価し、どの判断を優先的に扱うかを決定する。
+BJは、業務フローそのものではない。
+
+BJは、Phase1 DiscoveryでJudgement Point（JP）を発見するためのスコープである。
+
+例：
+
+- BJ01 新規クライアント獲得
+- BJ02 提案作成
+- BJ03 制作進行
+- BJ04 請求処理
+- BJ05 入金確認・回収
+
+---
+
+## Judgement Point（JP）
+
+Judgement Point（JP）は、業務の中で実際に発生している判断点である。
+
+JPは、原則として次の形式で表現する。
+
+```text
+〜するか？
+```
+
+例：
+
+- この企業を対象にするか？
+- この案件を優先するか？
+- この企業に接触するか？
+- アタリと判断するか？
+- この入金はどの請求か？
+- 保留するか？
+
+JPは、単なる作業ではない。
+
+その答えによって、後続の状態・行動・判断が変わるものをJPとして扱う。
+
+---
+
+## Case / Proposal
+
+JDAでは、判断対象を Case として扱う。
+
+```text
+Case = Entity × Context
+```
+
+実装上は、Caseを具体化した実行単位として Proposal を用いる場合がある。
+
+例：BJ01 新規クライアント獲得
+
+```text
+Entity = Company
+Context = Campaign
+Proposal = Company × Campaign
+```
+
+Proposalは、以下の中心単位となる。
+
+- State管理
+- JP実行
+- JLog記録
+- VLog評価
+- Learning対象
+
+---
+
+## Judgement Journey（JJ）
+
+Judgement Journey（JJ）は、JPの実行連鎖である。
+
+JPはPhase1 DiscoveryでBJをスコープとして発見される。
+
+ただし、発見後のJPはBJに従属し続けるのではなく、判断資産として扱われる。
+
+JJは、Phase5 Implementation以降で、JPがハーネス上で実行され、Proposal / Case の状態・属性・判断材料が更新されていく中で形成・観測される。
+
+つまり、
+
+```text
+BJ = JPを発見するための業務スコープ
+JP = 判断点
+JJ = JPが実行されることで形成される判断実行視点のJourney
+```
+
+である。
+
+---
+
+## JSC
+
+JSC（Judgement State Chart）は、判断による状態遷移を設計するための成果物である。
+
+JSCでは、処理手順ではなく状態を扱う。
+
+```text
+before_state
+↓
+JP
+↓
+after_state
+```
+
+JDAでは、判断を状態遷移として扱う。
+
+そのため、保留・例外・再判断も状態として設計する。
 
 ---
 
 ## JDC
 
-Judgement Design Canvas（判断設計キャンバス）
+JDC（Judgement Design Canvas）は、判断の中身を設計するための成果物である。
+
+JDCでは、以下を整理する。
+
+- 判断の定義
+- 判断対象
+- 判断材料
+- 判断条件
+- 判断観点
+- 判断結果
+- 判断主体
+- 判断責任
+- 判断確定方式
+- 出力
+
+JDCは、判断を実装可能・記録可能・学習可能にするための設計キャンバスである。
 
 ---
 
-## Learning Loop
+## JLog / VLog
 
-Data → AI → Options → Human → JLog → Action → Result → VLog → Learning
+JDAでは、判断を2種類のログとして記録する。
+
+```text
+JLog = 判断時の記録
+VLog = 判断後の妥当性評価
+```
+
+JLogには、以下を記録する。
+
+- 誰が判断したか
+- 何を判断したか
+- どの状態で判断したか
+- どの判断材料を使ったか
+- どの条件・観点で判断したか
+- なぜ判断したか
+- 判断後にどの状態へ遷移したか
+
+VLogには、以下を記録する。
+
+- 判断結果は妥当だったか
+- 判断材料は適切だったか
+- 判断理由は妥当だったか
+- 実際の結果はどうだったか
+- 次回どう改善するか
+
+JLogとVLogが揃うことで、判断は学習可能になる。
+
+---
+
+## Judgement Injection
+
+Judgement Injection は、JDA v1.6における重要な実装概念である。
+
+従来の業務システムでは、判断ロジックはコードや画面に埋め込まれやすい。
+
+JDAでは、JPをコードに埋め込むのではなく、定義として管理し、実行基盤に注入する。
+
+```text
+JP定義
+↓
+execute_jp
+↓
+State遷移
+↓
+JLog保存
+```
+
+これにより、JP定義と実行基盤を分離できる。
+
+判断をコードではなく、設計対象・運用対象・学習対象として扱えるようになる。
+
+---
+
+## Learning Cycle
+
+JDAのLearning Cycleは、判断を段階的に学習可能にする。
+
+```text
+判断材料学習
+↓
+判断再現学習
+↓
+判断委譲
+```
+
+### Stage1：Judgement Material Learning
+
+まず、AIは判断そのものではなく、判断材料の生成・整理を支援する。
+
+例：
+
+- 類似Caseを出す
+- 過去判断を示す
+- 判断材料を要約する
+- 判断理由の入力を補助する
+- 不足情報を提示する
+
+### Stage2：Judgement Reproduction Learning
+
+JLog / VLog が蓄積されると、AIは過去判断の再現を支援できるようになる。
+
+```text
+AI → Suggested Judgement
+Human → Confirm
+```
+
+### Stage3：Judgement Delegation
+
+十分なログと妥当性評価が蓄積された判断は、条件付きでAIへ委譲できる可能性がある。
+
+ただし、判断委譲にはAccountability（責任）の設計が必要である。
+
+---
+
+## JDA Method v1.6
+
+JDA Method v1.6 は、以下のフェーズで構成される。
+
+```text
+Phase0 Foundation
+↓
+Phase1 Discovery
+↓
+Phase2 JULIA
+↓
+Phase3 Design
+↓
+Phase4 Log
+↓
+Phase5 Implementation
+↓
+Phase6 Learning
+```
+
+---
+
+### Phase0 Foundation
+
+判断ドメインと業務全体像を把握し、Phase1 Discoveryの対象となるBusiness Journey（BJ）を定義する。
+
+主な成果物：
+
+- JDA-BMC
+- Business Journey一覧
+- 対象BJ
+
+---
+
+### Phase1 Discovery
+
+対象BJをスコープとして、実際に発生しているJudgement Point（JP）を抽出する。
+
+Phase1では、JJを設計しない。
+
+主な成果物：
+
+- JP一覧
+- JP精査記録
+- JP統合・除外理由メモ
+
+---
+
+### Phase2 JULIA
+
+JULIA（Judgement Log Impact Assessment）は、Phase1で抽出したJPを評価し、どの判断を優先的に扱うかを決定する工程である。
+
+JULIAでは、以下の4軸で評価する。
+
+- ROI
+- Business Impact
+- Automation Potential
+- Learning Value
+
+Phase2 JULIAは、
+
+```text
+どのJPに投資するか
+```
+
+を決める工程である。
+
+---
+
+### Phase3 Design
+
+Phase2で選定されたJPに対して、判断の構造・状態遷移・判断材料・責任・実行単位を設計する。
+
+主な成果物：
+
+- JSC（Judgement State Chart）
+- JDC（Judgement Design Canvas）
+- Case / Proposal 定義
+- 判断材料定義
+- 判断責任定義
+
+---
+
+### Phase4 Log
+
+Phase3で設計した判断を、JLog / VLogとして記録可能にする。
+
+主な成果物：
+
+- JLog定義
+- VLog定義
+- ログ項目一覧
+- 記録タイミング定義
+- 妥当性評価方法
+
+---
+
+### Phase5 Implementation
+
+JDAの実行基盤を設計・実装する。
+
+Phase5では、Judgement Injectionにより、JP定義と実行基盤を分離する。
+
+主な要素：
+
+- ハーネス
+- execute_jp
+- State管理
+- Proposal / Case
+- JLog / VLog
+- Operational Bridge
+
+---
+
+### Phase6 Learning
+
+JLog / VLogをもとに、判断材料・判断条件・判断観点・判断閾値を改善する。
+
+Phase6では、以下の3段階で学習する。
+
+```text
+Judgement Material Learning
+↓
+Judgement Reproduction Learning
+↓
+Judgement Delegation
+```
+
+---
+
+## Implementation Pattern
+
+JDA v1.6では、実装の進め方として Judgement Slice Implementation を定義する。
+
+Judgement Slice Implementation とは、
+
+> JULIAで選定された主要JPを中心に、  
+> 判断材料提示・判断入力・状態遷移・JLog / VLog収集を先に実装し、  
+> 前後工程はOperational Bridgeで補完しながら、  
+> 必要に応じて周辺JPの実行環境を追加していく実装パターン
+
+である。
+
+JDA実装では、最初から全てを作り込まない。
+
+```text
+判断ログが取れる最小構造で先に現場へ出す
+```
+
+ことを優先する。
+
+JJは、このようなPhase5以降の実装・運用の中で、JP実行連鎖として形成・観測される。
 
 ---
 
 ## AIとの関係
 
-JDAはAI導入理論ではない。
+JDAは、AI導入理論ではない。
 
-AIが判断を支援し、学習できる構造を設計する理論である。
+JDAは、AIが判断支援し、学習できる構造を設計する理論である。
 
----
+初期段階では、AIは判断しない。
 
-## v1.0 → v1.1 差分
+AIは判断材料を提示する。
 
-| 項目 | v1.0 | v1.1 |
-| ------ | ------ | ------ |
-| 構造 | プロセス中心 | 三層構造（Discovery / Investment / Learning） |
-| ROI | 未定義 | Judgement ROI導入 |
-| JULIA | 優先順位付け | 判断投資フレーム |
-| 判断構造 | JJ / JP | Chain / Journey / Point |
-| JDAの位置づけ | ログ設計 | 判断投資アーキテクチャ |
+```text
+AI = 判断材料支援
+Human = 判断主体
+JLog / VLog = 学習資産
+```
+
+AIに判断を委譲するのは、JLog / VLogが蓄積され、妥当性が確認された後である。
 
 ---
 
 ## 長期ビジョン
 
-企業世界モデルの構築
+JDAの長期ビジョンは、Enterprise World Model（企業世界モデル）の構築である。
+
+企業は、業務データだけでなく、判断データを蓄積することで、自社固有の判断構造を学習できる。
+
+その結果、企業は以下を持つことができる。
+
+- 自社固有の判断履歴
+- 自社固有の判断材料
+- 自社固有の判断基準
+- 自社固有の判断モデル
+
+JDAは、そのための判断アーキテクチャである。
 
 ---
 
-## Tools
+## Repository structure
 
-- [`tools/jda_phase_template.html`](tools/jda_phase_template.html)
-- JDAの進行状況を管理するフェーズ・ドキュメント対応表（ブラウザで開いて使用）
+```text
+.
+├── core/
+│   └── JDA_core_v1.6.md
+│
+├── method/
+│   ├── 00_overview.md
+│   ├── 01_phase0_foundation.md
+│   ├── 02_phase1_discovery.md
+│   ├── 03_phase2_julia.md
+│   ├── 04_phase3_design.md
+│   ├── 05_phase4_log.md
+│   ├── 06_phase5_implementation.md
+│   ├── 06a_judgement_slice_implementation.md
+│   ├── 07_phase6_learning.md
+│   └── JDA_BMC_definition.md
+│
+├── implementation/
+│   └── BJ01/
+│
+└── tools/
+    └── jda_phase_template.html
+```
+
+※ 実際のディレクトリ構成は、今後変更される可能性がある。
 
 ---
 
-## ライセンス
+## Current status
+
+JDA Core v1.6 and JDA Method v1.6 are currently organized around:
+
+- Judgement as state transition
+- Business Journey as JP discovery scope
+- JP as reusable judgement asset
+- Judgement Injection
+- JLog / VLog
+- Judgement Slice Implementation
+- Learning Cycle
+
+---
+
+## License
 
 Copyright (c) 2026 Shun Takeda（B-AS）
 
-本プロジェクトは **Creative Commons Attribution 4.0 International License（CC BY 4.0）** のもとで公開されています。
+This project is licensed under the  
+Creative Commons Attribution 4.0 International License（CC BY 4.0）.
 
-利用者は以下が可能です。
+You are free to:
 
-- 共有 — 任意の媒体で複製・再配布  
-- 改変 — 再構成・変形・派生作品の作成  
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material for any purpose, even commercially
 
-商用利用も可能です。
+Under the following condition:
 
-ただし以下の条件があります。
+- Attribution — You must give appropriate credit to the original author.
 
-- **表示（Attribution）** — 原著者のクレジットを表示すること
-
-ライセンス全文：
+License text:
 
 <https://creativecommons.org/licenses/by/4.0/>
 
-## 引用
+---
 
-本理論を研究・記事・資料等で利用する場合は、以下の形で引用してください。
+## Citation
 
-Judgement-Driven Architecture（判断ドリブンアーキテクチャ）
-著者：武田 俊（B-AS）
-GitHub Repository
+If you use this theory in research, articles, presentations, or other materials, please cite it as follows:
+
+Judgement-Driven Architecture（判断ドリブンアーキテクチャ）  
+Author: Shun Takeda（B-AS）  
+GitHub Repository  
 <https://github.com/judgement-driven/Judgement-Driven-Architecture>
 
 ### BibTeX
