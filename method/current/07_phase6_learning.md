@@ -138,6 +138,29 @@ Learningを段階的に進める。
 
 ---
 
+## 5.0 Stage0 — Learning Foundation（評価基盤構築）
+
+Learningを成立させるための前提として、
+まずVLogを継続的に取得できる状態を構築する。
+
+Stage0では判断モデルを改善しない。
+
+目的は、妥当性評価（VLog）が自動的に取得できる基盤を作ることである。
+
+```text
+JP実行
+↓
+状態確定（JSCに従う）
+↓
+後続状態追跡
+↓
+VLog生成
+```
+
+Stage0が成立して初めて、Stage1以降のLearningが始まる。
+
+---
+
 ## 5.1 Stage1 — Judgement Material Learning（判断材料学習）
 
 現段階で最も重要なLearning。
@@ -551,6 +574,9 @@ JLog / VLog
 ---
 
 # 11. 例（BJ01）
+
+以下はBJ01（新規クライアント獲得）における実装例である。
+対象BJによって具体的な内容は異なる。
 
 ---
 
