@@ -230,3 +230,38 @@ JDC：「望ましい後続状態」の定義をTransition Logicの一部とし�
 - Stage0自動VLog生成の実装設計に直結する論点
 - 「直後状態＝期待状態」という単純化は、note等の一般向け説明では問題ないが、
   実装・評価設計では区別が必要
+
+## 10. Learning Stageの再定義
+
+### Stage0 Learning Foundation
+
+目的：
+Learningを成立させるための評価基盤を構築する。
+
+内容：
+
+JP
+↓
+状態確定
+↓
+後続状態追跡
+↓
+VLog生成
+
+を自動的に実現する。
+
+Stage0では判断モデルを改善しない。
+
+まず妥当性評価（VLog）が継続的に取得できる状態を作る。
+
+### Stage1 Judgement Assistance
+
+判断材料改善
+
+### Stage2 Judgement Reproduction
+
+判断モデル改善
+
+### Stage3 Judgement Delegation
+
+判断委譲改善
