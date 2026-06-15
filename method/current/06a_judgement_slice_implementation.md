@@ -652,7 +652,7 @@ Phase5の主対象は以下である。
 ↓
 実行基盤の定義
 
-06b_implementation_pattern.md
+06a_judgement_slice_implementation.md
 ↓
 実装の進め方・範囲制御
 ```
