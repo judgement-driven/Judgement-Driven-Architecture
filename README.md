@@ -363,6 +363,23 @@ JDAのLearning Cycleは、判断を段階的に学習可能にする。
 判断委譲
 ```
 
+### Stage0：Learning Foundation
+
+まず、VLogを継続的に取得できる状態を構築する。
+
+```text
+JP実行
+↓
+状態確定
+↓
+後続状態追跡
+↓
+VLog生成
+```
+
+Stage0では判断モデルを改善しない。
+評価基盤を作ることがStage0の目的である。
+
 ### Stage1：Judgement Material Learning
 
 まず、AIは判断そのものではなく、判断材料の生成・整理を支援する。
