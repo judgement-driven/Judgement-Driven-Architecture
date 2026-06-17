@@ -138,7 +138,7 @@ Learningを段階的に進める。
 
 ---
 
-## 5.0 Stage0 — Learning Foundation（評価基盤構築）
+## 5.0 Stage0 — Validity Capture（妥当性取得）
 
 Learningを成立させるための前提として、
 まずVLogを継続的に取得できる状態を構築する。
