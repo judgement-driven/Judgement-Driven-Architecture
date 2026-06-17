@@ -307,10 +307,13 @@ JULIAは、
 
 ## 5.2 JULIA
 
-JULIA（Judgement Impact Assessment）は、
+
+JULIA（Judgement Scorecard）は、
 
 JP（Judgement Point）の重要度を評価し、
 どの判断から改善・実装・学習を進めるべきかを決定するための評価フレームワークである。
+
+JULIAという名前は、5つの評価軸の頭文字から取っている。
 
 JDAでは、
 
