@@ -205,7 +205,7 @@ Learning
 Operational Bridgeとは、
 
 > 未実装JPや未実装工程を、現場運用で補完しながら、  
-> JDAのハーネスに接続するための暫定的な接続層
+> JDAのJudgement Harnessに接続するための暫定的な接続層
 
 である。
 
@@ -269,16 +269,16 @@ Operational Bridgeの目的は、
 
 ---
 
-## 5.5 ハーネスとの接続
+## 5.5 Judgement Harnessとの接続
 
-Operational Bridgeは、ハーネスを迂回するためのものではない。
+Operational Bridgeは、Judgement Harnessを迂回するためのものではない。
 
-Operational Bridgeは、  
-未実装JP・未実装工程・既存運用を、  
-ハーネスに接続するための暫定的な接続層である。
+Operational Bridgeは、
+未実装JP・未実装工程・既存運用を、
+Judgement Harnessに接続するための暫定的な接続層である。
 
-そのため、Operational Bridgeを使用する場合でも、  
-判断は可能な限りハーネス上で実行し、  
+そのため、Operational Bridgeを使用する場合でも、
+判断は可能な限りJudgement Harness上で実行し、
 State更新・JLog保存・VLog評価へ接続できるようにする。
 
 ```text
@@ -623,7 +623,7 @@ JDAにおける実行基盤を定義する。
 
 Phase5の主対象は以下である。
 
-- ハーネス
+- Judgement Harness
 - Judgement Injection
 - execute_jp
 - Proposal
@@ -698,4 +698,4 @@ JDA実装では、
 
 | Version | 内容 |
 |---|---|
-| v1.6 | 初版 / Judgement Slice Implementation / Operational Bridge 定義 / JULIAとの責務分離 / ハーネス接続 / JP実行環境の明確化 |
+| v1.6 | 初版 / Judgement Slice Implementation / Operational Bridge 定義 / JULIAとの責務分離 / Judgement Harness接続 / JP実行環境の明確化 |

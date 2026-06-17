@@ -241,7 +241,7 @@ JPはPhase1 DiscoveryでBJをスコープとして発見される。
 
 ただし、発見後のJPはBJに従属し続けるのではなく、判断資産として扱われる。
 
-JJは、Phase5 Implementation以降で、JPがハーネス上で実行され、Proposal / Case の状態・属性・判断材料が更新されていく中で形成・観測される。
+JJは、Phase5 Implementation以降で、JPがJudgement Harness上で実行され、Proposal / Case の状態・属性・判断材料が更新されていく中で形成・観測される。
 
 つまり、
 
@@ -510,11 +510,11 @@ Phase3で設計した判断を、JLog / VLogとして記録可能にする。
 
 JDAの実行基盤を設計・実装する。
 
-Phase5では、Judgement Injectionにより、JP定義と実行基盤を分離する。
+Phase5では、Judgement Injectionにより、JP定義とJudgement Harness(実行基盤)を分離する。
 
 主な要素：
 
-- ハーネス
+- Judgement Harness
 - execute_jp
 - State管理
 - Proposal / Case
@@ -638,6 +638,7 @@ JDA Core v1.6 and JDA Method v1.6 are currently organized around:
 - Judgement as state transition
 - Business Journey as JP discovery scope
 - JP as reusable judgement asset
+- Judgement Harness
 - Judgement Injection
 - JLog / VLog
 - Judgement Slice Implementation

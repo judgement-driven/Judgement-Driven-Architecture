@@ -39,7 +39,7 @@ JDA（Judgement-Driven Architecture）は、
 
 v1.6では、v1.4までの「判断設計アーキテクチャ」を拡張し、
 
-- ハーネスエンジニアリング
+- Judgement Harness
 - Judgement Injection
 - 共通JP実行
 - 学習サイクル
@@ -356,14 +356,17 @@ JDAでは判断を以下の4軸で扱う。
 
 # 7. 実行モデル
 
-## 7.1 JDA版ハーネスエンジニアリング
+## 7.1 Judgement Harness
 
-JDA版ハーネスエンジニアリングとは、
+Judgement Harnessとは、
 
 > 判断を再現可能かつ学習可能に実行するため、  
 > 状態・入力・実行・ログを統一する実行基盤
 
 である。
+
+JDAでは、JPを外部定義として管理し、Judgement Harness上で実行する。
+Judgement Harnessは、Judgement InjectionによってJP定義と実行基盤を分離する。
 
 ---
 
@@ -371,7 +374,7 @@ JDA版ハーネスエンジニアリングとは、
 
 Judgement Injectionとは、
 
-> JPをハーネス内部で取得するのではなく、  
+> JPをJudgement Harness内部で取得するのではなく、  
 > 外部で決定し、  
 > 実行基盤へ注入する構造
 
@@ -566,5 +569,5 @@ JDAとは、
 | v1.2 | BJ / JJ / JP の役割整理 |
 | v1.3 | Case / JSC / JDC / JLog / VLog 導入 |
 | v1.4 | Learning Loop / Delegation / Venture Judgement 強化 |
-| v1.5 | ハーネスエンジニアリングおよび Judgement Injection の検討開始（実装検証フェーズ） |
+| v1.5 | Judgement Harnessおよび Judgement Injection の検討開始（実装検証フェーズ） |
 | v1.6 | 判断実行 + 学習アーキテクチャへ拡張 / BJ-JP N:M構造 / 共通JP実行 / Learning Cycle統合 |
