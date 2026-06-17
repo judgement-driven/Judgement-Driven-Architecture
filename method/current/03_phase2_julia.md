@@ -1,5 +1,7 @@
 # JDA Method v1.6 — Phase2 JULIA
 
+v1.7で全面改訂予定
+
 ---
 
 # 1. 本フェーズの目的

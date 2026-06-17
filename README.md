@@ -459,14 +459,19 @@ Phase1では、JJを設計しない。
 
 ### Phase2 JULIA
 
-JULIA（Judgement Log Impact Assessment）は、Phase1で抽出したJPを評価し、どの判断を優先的に扱うかを決定する工程である。
+JULIA（Judgement Scorecard）は、
 
-JULIAでは、以下の4軸で評価する。
+Phase1で発見したJP（Judgement Point）を評価し、どの判断を優先的に設計・実装・学習するかを決定する工程である。
+JDAでは、発見したJP、設計対象とするJP、実装対象とするJPを同一視しない。
+限られたリソースの中で、どの判断へ投資するかを決定するためにJULIAを用いる。
 
-- ROI
-- Business Impact
-- Automation Potential
-- Learning Value
+JULIAでは、以下の5軸で評価する。
+
+- Judgement Financial Impact
+- Urgency & Frequency
+- Latency
+- Influence Scope
+- Adaptive / Learning Value
 
 Phase2 JULIAは、
 

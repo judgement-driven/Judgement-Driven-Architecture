@@ -292,24 +292,72 @@ JDAでは、
 
 ---
 
-## 5.1 Judgement ROI
+## 5.1 Judgement Investment
 
-ROIは行動ではなく、  
-判断単位で評価する。
+JDAでは、
+
+「どの判断へ投資するか」
+
+を中心に設計する。
+
+JULIAは、
+判断改善・判断実装・判断学習への投資優先度を決定するための仕組みである。
 
 ---
 
 ## 5.2 JULIA
 
-JULIAは、  
-JP単位の投資優先度評価モデルである。
+JULIA（Judgement Impact Assessment）は、
+
+JP（Judgement Point）の重要度を評価し、
+どの判断から改善・実装・学習を進めるべきかを決定するための評価フレームワークである。
+
+JDAでは、
+
+- 発見したJP
+- 設計対象とするJP
+- 実装対象とするJP
+
+を同一視しない。
+
+JULIAは、限られたリソースの中で、
+どの判断へ投資するかを決定するために用いる。
 
 評価軸：
 
-- ROI
-- Business Impact
-- Automation Potential
-- Learning Value
+- J = Judgement Financial Impact
+- U = Urgency & Frequency
+- L = Latency
+- I = Influence Scope
+- A = Adaptive / Learning Value
+
+### Judgement Financial Impact
+
+その判断が売上・利益・コスト・損失回避に
+どれだけ影響するか。
+
+### Urgency & Frequency
+
+その判断がどれだけ頻繁に発生し、
+どれだけ迅速な対応を求められるか。
+
+### Latency
+
+その判断が停滞した場合、
+業務や意思決定全体にどの程度の
+ボトルネックを生むか。
+
+### Influence Scope
+
+その判断結果が、
+後続の判断や他部門へ
+どれだけ影響を与えるか。
+
+### Adaptive / Learning Value
+
+その判断を記録・学習することで、
+将来的な判断品質向上に
+どれだけ寄与するか。
 
 ---
 
