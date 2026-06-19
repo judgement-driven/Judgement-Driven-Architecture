@@ -480,3 +480,47 @@ Data Sources = 判断材料
 JP = 判断
 Decision = 判断結果
 Output = 判断後の処理
+
+---
+
+## 13. JSCの表現見直し
+
+### 背景
+
+v1.7検討において、
+
+JSC = State Space
+
+という表現を使用していた。
+
+しかし実際のJSCは、
+状態の集合そのものではなく、
+
+状態
+↓
+JP
+↓
+次状態
+
+を表現するモデルである。
+
+### 更新候補
+
+JSC = State Chart
+
+### 整理
+
+State Space
+= 取り得る状態の集合
+
+State Chart
+= 状態と遷移を表現するモデル
+
+JDAにおけるJSCは後者に近い。
+
+### 備考
+
+Judgement-Driven State Machine
+という考え方自体は維持する。
+
+JSCはその状態遷移を表現するState Chartである。
