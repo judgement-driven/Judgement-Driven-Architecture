@@ -265,3 +265,36 @@ Stage0では判断モデルを改善しない。
 ### Stage3 Judgement Delegation
 
 判断委譲改善
+
+
+## 11. Actor Context（認証・判断主体）
+
+JDAにおいて、判断は必ず判断主体（Actor）に紐づく。
+
+そのためPhase5 Implementationでは、execute_jpを実行する前提として、
+認証済みユーザー情報をActor Contextとして取得し、
+JLogに保存できる状態を共通基盤として用意する。
+
+Actor Contextには最低限以下を含める。
+
+- actor_id
+- actor_name
+- role
+
+認証そのものはexecute_jpの内部責務ではない。
+execute_jpは、認証済みのActor Contextを受け取り、
+判断結果・状態遷移・JLogとともに保存する。
+
+#### 認証レベル
+
+Level 1：簡易認証
+- ユーザー選択 + PIN
+- 目的：JLogに判断主体を残す
+
+Level 2：権限管理
+- roleによる操作制御
+- 目的：管理機能・削除・設定変更を制御する
+
+Level 3：外部認証
+- Google Workspace / OAuth 等
+- 目的：本格運用・監査対応
