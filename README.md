@@ -373,11 +373,13 @@ JLog保存
 JDAのLearning Cycleは、判断を段階的に学習可能にする。
 
 ```text
-判断材料学習
+Learning Foundation
 ↓
-判断再現学習
+Judgement Material Learning
 ↓
-判断委譲
+Judgement Reproduction Learning
+↓
+Judgement Delegation
 ```
 
 ### Stage0：Learning Foundation
@@ -552,6 +554,8 @@ JLog / VLogをもとに、判断材料・判断条件・判断観点・判断閾
 Phase6では、以下の3段階で学習する。
 
 ```text
+Learning Foundation
+↓
 Judgement Material Learning
 ↓
 Judgement Reproduction Learning
