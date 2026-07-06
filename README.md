@@ -673,7 +673,6 @@ Current Core Concepts
 - Judgement Injection
 - Learning Cycle (Stage0–3)
 
-
 ---
 
 ## License
