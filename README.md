@@ -17,6 +17,17 @@ JDA（Judgement-Driven Architecture）は、企業活動に存在する判断を
 
 ---
 
+## Latest Stable Release
+
+Current Version
+
+- JDA Core v1.7
+- JDA Method v1.7
+
+This repository contains the current stable definition of
+Judgement-Driven Architecture.
+
+---
 ## なぜJDAを考えたのか
 
 多くの業務は、業務フローとして記述される。
@@ -102,13 +113,6 @@ JDAにおいて、判断とは、
 状態B
 ```
 
-JDAでは、判断を以下の4側面から扱う。
-
-- Proceed（進行）
-- Validity（妥当性）
-- Accountability（責任）
-- Venture（探索性）
-
 ---
 
 ## JDAとは何か
@@ -149,7 +153,7 @@ JLog / VLog が蓄積されることで、AIは過去判断を再現し、将来
 
 ## JDAの基本構造
 
-JDA v1.6では、Business Journey（BJ）をスコープとしてJudgement Point（JP）を発見し、そのJPを設計・記録・実行・学習の中心単位として扱う。
+JDA v1.7では、Business Journey（BJ）をスコープとしてJudgement Point（JP）を発見し、そのJPを設計・記録・実行・学習の中心単位として扱う。
 
 ```text
 BJ（発見スコープ）→ JP（判断点）
@@ -257,7 +261,7 @@ JJ = JPが実行されることで形成される判断実行視点のJourney
 
 ## JSC
 
-JSC（Judgement State Chart）は、判断による状態遷移を設計するための成果物である。
+JSC（Judgement State Chart）は、判断対象（Target）が取り得る状態と、Judgement Point（JP）による状態遷移を定義するState Chartである。
 
 JSCでは、処理手順ではなく状態を扱う。
 
@@ -281,16 +285,15 @@ JDC（Judgement Design Canvas）は、判断の中身を設計するための成
 
 JDCでは、以下を整理する。
 
-- 判断の定義
-- 判断対象
-- 判断材料
-- 判断条件
-- 判断観点
-- 判断結果
-- 判断主体
-- 判断責任
-- 判断確定方式
-- 出力
+- Purpose
+- Subject
+- Data Sources
+- Conditions
+- Perspectives
+- Decision
+- Actor
+- Accountability
+- Output
 
 JDCは、判断を実装可能・記録可能・学習可能にするための設計キャンバスである。
 
@@ -323,13 +326,27 @@ VLogには、以下を記録する。
 - 実際の結果はどうだったか
 - 次回どう改善するか
 
+
+
+JLogでは、判断結果だけでなく、判断時点で利用可能であった情報全体を **Judgement Snapshot** として記録する。
+
+```text
+Exploration Context
+↓
+Candidate Snapshot
+↓
+Decision Context
+↓
+Judgement
+```
+
 JLogとVLogが揃うことで、判断は学習可能になる。
 
 ---
 
 ## Judgement Injection
 
-Judgement Injection は、JDA v1.6における重要な実装概念である。
+Judgement Injection は、JDAにおける重要な実装概念である。
 
 従来の業務システムでは、判断ロジックはコードや画面に埋め込まれやすい。
 
@@ -409,9 +426,9 @@ Human → Confirm
 
 ---
 
-## JDA Method v1.6
+## JDA Method v1.7
 
-JDA Method v1.6 は、以下のフェーズで構成される。
+JDA Method v1.7 は、以下のフェーズで構成される。
 
 ```text
 Phase0 Foundation
@@ -546,7 +563,7 @@ Judgement Delegation
 
 ## Implementation Pattern
 
-JDA v1.6では、実装の進め方として Judgement Slice Implementation を定義する。
+JDA v1.7では、実装の進め方として Judgement Slice Implementation を定義する。
 
 Judgement Slice Implementation とは、
 
@@ -611,7 +628,7 @@ JDAは、そのための判断アーキテクチャである。
 ```text
 .
 ├── core/
-│   └── JDA_core_v1.6.md
+│   └── JDA_core_v1.7.md
 │
 ├── method/
 │   ├── 00_overview.md
@@ -638,16 +655,20 @@ JDAは、そのための判断アーキテクチャである。
 
 ## Current status
 
-JDA Core v1.6 and JDA Method v1.6 are currently organized around:
+Current Core Concepts
 
-- Judgement as state transition
-- Business Journey as JP discovery scope
-- JP as reusable judgement asset
+- Business Journey (BJ)
+- Judgement Point (JP)
+- Judgement State Chart (JSC)
+- Judgement Design Canvas (JDC)
+- Judgement Scorecard (JULIA)
+- Judgement Snapshot
+- JLog
+- VLog
 - Judgement Harness
 - Judgement Injection
-- JLog / VLog
-- Judgement Slice Implementation
-- Learning Cycle
+- Learning Cycle (Stage0–3)
+
 
 ---
 
