@@ -1,4 +1,4 @@
-# JDA Method v1.6 — Phase1 Discovery
+# JDA Method v1.7 — Phase1 Discovery
 
 ---
 
@@ -509,7 +509,7 @@ JP抽出後、重複整理の前に精査を行う。
 - JP候補の採用・除外理由が記録されている
 - 重複が整理されている
 - JP一覧が作成されている
-- Phase2 JULIAで比較可能な粒度になっている
+- Phase2 JULIA (Judgement Scorecard)で比較可能な粒度になっている
 
 ---
 
@@ -527,7 +527,7 @@ JP抽出後、重複整理の前に精査を行う。
 ❌ 3個  
 ⭕ 5〜10個以上
 
-判断が少なすぎると、次フェーズ（JULIA）で比較・評価ができず、  
+判断が少なすぎると、次フェーズ（Phase2 JULIA (Judgement Scorecard)）で比較・評価ができず、  
 優先順位付けが機能しにくくなる。
 
 ただし、数を増やすこと自体が目的ではない。  
@@ -556,7 +556,7 @@ JJは、Phase5以降でJPが実行されることで形成・観測される。
 ❌ この判断はAI化できるか？  
 ⭕ ここで何を決めているか？
 
-AI適用や自動化可能性は、Phase2 JULIA以降で扱う。
+AI適用や自動化可能性は、Phase2 JULIA (Judgement Scorecard)以降で扱う。
 
 ---
 
@@ -569,7 +569,7 @@ AI適用や自動化可能性は、Phase2 JULIA以降で扱う。
 
 # 14. 次工程
 
-→ phase2 julia
+→ Phase2 JULIA (Judgement Scorecard)
 
 Phase2では、Phase1で抽出したJPを評価し、  
 どの判断に投資するかを決定する。
@@ -586,3 +586,4 @@ Phase5以降で実行されることでJJとして形成・観測される。
 | v1.2 | 初版 / BJを判断視点で再解釈し、JPを抽出するPhase1 Discoveryを定義 |
 | v1.3 | JP精査基準を追加 / 「答えによって状態遷移が変わるか」をJP採用基準として明確化 / JP精査記録を追加 |
 | v1.6 | JJの位置づけを再定義 / Phase1ではJJを設計せず、BJをスコープとしてJPを発見する方針へ変更 / JP発生源として交差判断・企業内部判断・顧客内部判断を整理 / BtoCでは顧客側判断もJPになり得ることを追加 |
+| v1.7 | Phase2名称をJudgement Scorecardへ更新 / Core v1.7との用語統一 |

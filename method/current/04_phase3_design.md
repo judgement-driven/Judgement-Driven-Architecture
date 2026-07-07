@@ -1,4 +1,4 @@
-# JDA Method v1.6 — Phase3 Design
+# JDA Method v1.7 — Phase3 Design
 
 ---
 
@@ -102,9 +102,9 @@ JPによる判断
 
 ---
 
-## 4.3 v1.6における設計観点
+## 4.3 v1.7における設計観点
 
-v1.6では、判断設計を以下に接続する。
+v1.7では、判断設計を以下に接続する。
 
 - Proposal / Case
 - State
@@ -198,7 +198,9 @@ Phase3では、対象JPごとに以下を定義する。
 
 ## 6.1 目的
 
-JSCは、判断の前後関係を状態として定義するための設計成果物である。
+JSC（Judgement State Chart）は、  
+判断対象（Target）が取り得る状態と、Judgement Point（JP）による状態遷移を定義する  
+State Chartである。
 
 JSCでは、
 
@@ -308,77 +310,50 @@ Judgement Design Canvas（JDC）とは、
 
 ---
 
-# 8. JDCの構成（4軸）
+## 7.3 v1.7における構造変更
 
-JDCは以下の4つの軸で構成される。
+v1.6までのJDCは、Proceed（進行） / Validity（妥当性） / Accountability（責任） / Venture（探索性）の4軸で構成されていた。
 
----
+v1.7では、この4軸をJDCの正式構造としては採用しない。
 
-## 8.1 Proceed（進行）
+概念そのものを捨てたわけではなく、各設計観点は、以下のJDC構成要素へ整理された。
 
-判断の結果、どの状態に進むか。
+```text
+Purpose / Subject / Data Sources / Conditions / Perspectives /
+Decision / Actor / Accountability / Output（9要素） ← v1.7で正式採用
+```
 
-主な設計項目：
+旧4軸の内容は、以下のように9要素へ整理されている。
 
-- 判断結果
-- 遷移先状態
-- 次アクション
-- 後続JP
+```text
+Proceed（判断結果・遷移先状態・次アクション・後続JP）
+→ Decision / Output に整理
 
----
+Validity（判断材料・データソース・判断条件・判断観点・判断理由・妥当性評価の手がかり）
+→ Data Sources / Conditions / Perspectives に整理（判断理由・妥当性評価はJLog / VLogに接続）
 
-## 8.2 Validity（妥当性）
+Accountability（判断主体・判断責任者・承認者・レビュー者・エスカレーション先・AI提案時の最終責任）
+→ Actor / Accountability に整理
 
-その判断が何を根拠に行われるか。
-
-主な設計項目：
-
-- 判断材料
-- データソース
-- 判断条件
-- 判断観点
-- 判断理由
-- 妥当性評価の手がかり
+Venture（定型・半定型・非定型、探索性の判定）
+→ v1.7ではJDCの正式構造としては採用しない。履歴として残し、必要に応じてv1.8以降で再検討する
+```
 
 ---
 
-## 8.3 Accountability（責任）
+# 8. JDCの構成（9要素）
 
-誰が判断し、誰が責任を持つか。
+JDCは以下の9つの要素で構成される。
 
-主な設計項目：
-
-- 判断主体
-- 判断責任者
-- 承認者
-- レビュー者
-- エスカレーション先
-- AI提案時の最終責任
-
----
-
-## 8.4 Venture（探索性）
-
-どれだけ未知・リスク・例外を含むか。
-
-主な設計項目：
-
-- 定型 / 半定型 / 非定型
-- 例外の多さ
-- 判断材料の曖昧さ
-- 暗黙知の依存度
-- AI支援可能性
-- 将来的な判断再現可能性
-
----
-
-## 8.5 Venture判定基準
-
-| 区分 | 内容 |
-|---|---|
-| 定型 | ルールが明確で、ほぼ全ケースをカバーできる |
-| 半定型 | ルールはあるが例外が存在する |
-| 非定型 | ルール化が困難で、ケースバイケースの判断が必要 |
+- Purpose
+- Subject
+- Data Sources
+- Conditions
+- Perspectives
+- Decision
+- Actor
+- Accountability
+- Output
 
 ---
 
@@ -388,9 +363,9 @@ JDCは以下の4つの軸で構成される。
 
 ---
 
-## 9.1 判断の定義
+## 9.1 Purpose
 
-対象JPが何を決める判断なのかを定義する。
+このJPが何のために存在するか、対象JPが何を決める判断なのかを定義する。
 
 例：
 
@@ -402,7 +377,7 @@ JDCは以下の4つの軸で構成される。
 
 ---
 
-## 9.2 対象（Subject）
+## 9.2 Subject
 
 判断対象を定義する。
 
@@ -421,7 +396,7 @@ JDCは以下の4つの軸で構成される。
 
 ---
 
-## 9.3 判断材料（Data Sources）
+## 9.3 Data Sources
 
 判断に使用する情報を定義する。
 
@@ -437,7 +412,7 @@ JDCは以下の4つの軸で構成される。
 
 ---
 
-## 9.4 判断条件（Conditions）
+## 9.4 Conditions
 
 客観的に判定可能な条件を定義する。
 
@@ -453,7 +428,7 @@ JDCは以下の4つの軸で構成される。
 
 ---
 
-## 9.5 判断観点（Perspectives）
+## 9.5 Perspectives
 
 経験・文脈・暗黙知に依存する観点を定義する。
 
@@ -471,7 +446,7 @@ JLog / VLogを通じて将来的に学習対象となる。
 
 ---
 
-## 9.6 判断結果（Decision）
+## 9.6 Decision
 
 判断結果として取り得る選択肢を定義する。
 
@@ -490,9 +465,9 @@ JLog / VLogを通じて将来的に学習対象となる。
 
 ---
 
-## 9.7 判断主体（Actor）
+## 9.7 Actor
 
-誰が判断するかを定義する。
+誰が判断を行うかを定義する。
 
 例：
 
@@ -517,9 +492,30 @@ AIが判断材料を提示し、人間が判断する
 
 と捉える。
 
+### 判断確定の形態
+
+判断がどのように確定されるかは、Actorの運用形態として捉える。
+
+例：
+
+- 人が最終判断
+- AI提案 + 人確認
+- ルール判定 + 人確認
+- 自動確定
+- エスカレーション
+
+初期段階では、
+
+```text
+AI提案 + 人判断
+```
+
+を基本とし、  
+JLog / VLog が蓄積された後に判断再現・判断委譲を検討する。
+
 ---
 
-## 9.8 判断責任（Accountability）
+## 9.8 Accountability
 
 判断の責任を誰が持つかを定義する。
 
@@ -541,32 +537,17 @@ AIが判断材料を提示し、人間が判断する
 AIが判断材料を提示する場合でも、  
 判断責任は人間または組織に残る。
 
----
+AI提案時の最終責任も、必ずここで明記する。
 
-## 9.9 判断確定方式
+判断責任に関わる役割として、以下も対象に含める。
 
-判断をどのように確定するかを定義する。
-
-例：
-
-- 人が最終判断
-- AI提案 + 人確認
-- ルール判定 + 人確認
-- 自動確定
-- エスカレーション
-
-初期段階では、
-
-```text
-AI提案 + 人判断
-```
-
-を基本とし、  
-JLog / VLog が蓄積された後に判断再現・判断委譲を検討する。
+- 承認者
+- レビュー者
+- エスカレーション先
 
 ---
 
-## 9.10 出力（Output）
+## 9.9 Output
 
 判断の出力を定義する。
 
@@ -578,6 +559,7 @@ JLog / VLog が蓄積された後に判断再現・判断委譲を検討する�
 - campaign候補
 - 注意喚起
 - 保留理由
+- 遷移先状態
 - 後続JPへの入力情報
 
 出力は、後続JP・UI・JLog・VLogに接続する。
@@ -623,13 +605,13 @@ JLog / VLog が蓄積された後に判断再現・判断委譲を検討する�
 
 ## 10.4 JDCでの設計例（例外）
 
-- データ：入金情報・請求情報
-- 条件：金額不一致
-- 観点：名義類似・過去履歴
-- 判断結果：保留
-- 判断主体：経理
-- 判断責任：経理担当者
-- 確定方式：人判断
+- Data Sources：入金情報・請求情報
+- Conditions：金額不一致
+- Perspectives：名義類似・過去履歴
+- Decision：保留
+- Actor：経理
+- Accountability：経理担当者
+- Output：保留理由、次確認対象
 
 ---
 
@@ -659,6 +641,19 @@ JDCで定義した判断材料・条件・観点・結果・主体・責任は�
 
 - before_state
 - after_state
+
+Phase4 Logでは、これらに加えて、  
+判断時点で利用可能であった情報全体を Judgement Snapshot として記録する。
+
+```text
+Exploration Context
+↓
+Candidate Snapshot
+↓
+Decision Context
+↓
+Judgement
+```
 
 ---
 
@@ -710,7 +705,7 @@ Phase3では、execute_jpで扱えるように、以下を明確にする。
 - transition_map
 - after_state
 - actor
-- input_data
+- data_sources
 - reason
 
 ---
@@ -845,16 +840,15 @@ Phase3の時点で、以下を意識する。
 
 | 項目 | 内容 |
 |---|---|
-| 判断の定義 | この入金はどの請求か？ |
-| 対象 | 入金データ × 請求情報 |
-| 判断材料 | 入金金額、振込名義、請求一覧 |
-| 判断条件 | 金額一致、請求日、請求額 |
-| 判断観点 | 名義揺れ、過去履歴、顧客特性 |
-| 判断結果 | A請求 / B請求 / 保留 |
-| 判断主体 | 経理担当 |
-| 判断責任 | 経理担当者 |
-| 判断確定方式 | 人判断 |
-| 出力 | 紐付け結果、保留理由、次確認対象 |
+| Purpose | この入金はどの請求か？ |
+| Subject | 入金データ × 請求情報 |
+| Data Sources | 入金金額、振込名義、請求一覧 |
+| Conditions | 金額一致、請求日、請求額 |
+| Perspectives | 名義揺れ、過去履歴、顧客特性 |
+| Decision | A請求 / B請求 / 保留 |
+| Actor | 経理担当 |
+| Accountability | 経理担当者 |
+| Output | 紐付け結果、保留理由、次確認対象 |
 
 ---
 
@@ -923,9 +917,16 @@ Phase3の時点で、以下を意識する。
 
 ---
 
+## 16.8 旧4軸で考えてしまう
+
+❌ Proceed / Validity / Accountability / Ventureで整理しようとする  
+⭕ Purpose / Subject / Data Sources / Conditions / Perspectives / Decision / Actor / Accountability / Outputの9要素で整理する
+
+---
+
 # 17. 次工程
 
-→ phase4 log（ログ設計）
+→ Phase4 Log（ログ設計）
 
 Phase4では、Phase3で設計したJSC / JDCをもとに、  
 JLog / VLog の記録項目・記録タイミング・評価方法を設計する。
@@ -938,3 +939,4 @@ JLog / VLog の記録項目・記録タイミング・評価方法を設計す�
 |---|---|
 | v1.3 | 初版 / JSC・JDC・Case定義を追加 / 判断を状態遷移として扱う設計を定義 |
 | v1.6 | Case / Proposal の関係を明確化 / JDCをJudgement Design Canvasとして再定義 / 判断主体と判断責任を分離 / execute_jp・JLog・VLog・Judgement Slice Implementationへの接続を追加 / AIを判断材料支援から始める方針を明記 |
+| v1.7 | JDCをフラット構造へ変更 / Proceed・Validity・Accountability・Venture構造をJDCの正式構造としては不採用とし、旧内容をDecision / Output / Data Sources / Conditions / Perspectives / Actor / Accountabilityへ整理 / JDCをPurpose・Subject・Data Sources・Conditions・Perspectives・Decision・Actor・Accountability・Outputの9要素へ再定義 / 「判断確定方式」を正式項目から除外し、Actorの運用形態として整理 / JSC定義をCore v1.7（判断対象＝TargetとState Chart表現）に統一 / Phase4 LogのJudgement Snapshotとの接続を明記 / Core v1.7・README v1.7との整合 |

@@ -197,7 +197,7 @@ JDCで定義した判断材料・条件・観点・結果・主体・責任は�
 | jp_id | 対象JP |
 | before_state | 判断前の状態 |
 | after_state | 判断後の状態 |
-| decision_context | 判断時点で利用可能であった判断材料 |
+| judgement_snapshot | 判断時点で利用可能であった情報全体（Judgement Snapshot） |
 | decision | 判断結果 |
 | reason | 判断理由 |
 | actor | 判断主体 |
@@ -228,11 +228,11 @@ after_state
 
 ---
 
-## 5.7 判断材料の記録
+## 5.7 Data Sources の記録
 
-5.5の判断材料（input_data）について補足する。
+5.5の Data Sources について補足する。
 
-判断材料は、できる限り構造化して記録する。
+Data Sources は、できる限り構造化して記録する。
 
 例：
 
@@ -243,26 +243,26 @@ after_state
 - 現場メモ
 - 判断時に参照した情報
 
-判断材料は、Phase6 Learningにおける **判断材料学習** の主要対象となる。
+Data Sources は、Phase6 Learningにおける **Judgement Material Learning** の主要対象となる。
 
 ---
 
-## 5.8 判断条件と判断観点
+## 5.8 Conditions と Perspectives
 
 5.5の判断条件・判断観点について補足する。
 
-JLogでは、Phase3で分けた以下を分けて記録する。
+JLogでは、Phase3で定義した Conditions と Perspectives を分けて記録する。
 
 ```text
-判断条件 = ルール化しやすいもの
-判断観点 = 経験・文脈・暗黙知に依存するもの
+Conditions = ルール化しやすいもの
+Perspectives = 経験・文脈・暗黙知に依存するもの
 ```
 
 この分離により、後から以下を分析できる。
 
-- どの条件が有効だったか
-- どの観点が判断に影響したか
-- どの観点が属人化しているか
+- どのConditionsが有効だったか
+- どのPerspectivesが判断に影響したか
+- どのPerspectivesが属人化しているか
 - AIがどの判断材料を改善すべきか
 
 ---
@@ -759,7 +759,6 @@ JLog / VLog は、Phase6 Learning において以下の改善に使われる。
 - 判断材料
 - 判断条件（Condition）
 - 判断観点（Perspective）
-- 判断閾値（Threshold）
 - 判断理由
 - AIプロンプト
 - UI
@@ -768,7 +767,7 @@ JLog / VLog は、Phase6 Learning において以下の改善に使われる。
 
 ---
 
-## 10.2 判断材料学習
+## 10.2 Judgement Material Learning（判断材料学習）
 
 初期段階で最も重要なのは、判断そのものの自動化ではなく、
 
@@ -789,7 +788,7 @@ JLog / VLog により、
 
 ---
 
-## 10.3 判断再現学習
+## 10.3 Judgement Reproduction Learning（判断再現学習）
 
 JLog / VLog が蓄積されると、AIは過去判断を再現し始める。
 
@@ -804,7 +803,7 @@ Human → Confirm
 
 ---
 
-## 10.4 判断委譲
+## 10.4 Judgement Delegation（判断委譲）
 
 十分なJLog / VLogが蓄積され、妥当性が確認できた判断は、  
 将来的にAIへ段階的に委譲される可能性がある。
@@ -958,7 +957,7 @@ Human → Confirm
 
 # 15. 次工程
 
-→ phase5 implementation（実装）
+→ Phase5 Implementation（実装）
 
 Phase5では、本フェーズで設計したJLog / VLogを、  
 execute_jpおよびハーネス上に実装する。

@@ -1,4 +1,4 @@
-# JDA Method v1.6 — Phase0 Foundation
+# JDA Method v1.7 — Phase0 Foundation
 
 ---
 
@@ -139,56 +139,37 @@ Phase0では以下を行わない。
 
 # 6. ステップ2：JDA-BMC作成
 
-## 6.1 目的
+## 6.1 JDA-BMCとは
 
-JDA-BMC（Judgement-Driven Architecture Business Model Canvas）を用いて、判断ドメインを定義する。
+JDA-BMC（Judgement-Driven Architecture Business Model Canvas）は、Business Journey（BJ）を発見するための整理フレームワークである。
 
-JDA-BMCは、業務全体の中で、  
-どこに判断が発生しそうかを把握するためのフレームである。
+従来のBusiness Model Canvasが事業モデルを整理することを目的とするのに対し、JDA-BMCは**判断発生領域（Judgement Domain）**を発見することを目的とする。
 
----
+Phase0ではJudgement Point（JP）は抽出しない。本フェーズで扱うのはJPではなく、判断発生領域である。
 
-## 6.2 粒度の注意
-
-JDA-BMCで扱う判断は、Judgement Point（JP）ではない。
-
-JDA-BMCで扱うのは、
-
-```text
-判断発生領域
-```
-
-である。
-
-例：
-
-```text
-顧客選定
-提案判断
-入金判断
-優先順位判断
-問い合わせ対応判断
-```
-
-詳細な判断点であるJPは、Phase1 Discoveryで抽出する。
-
----
-
-## 6.3 JDA-BMCで見るもの
-
-JDA-BMCでは、以下を粗く整理する。
+## 6.2 構成要素
 
 - 顧客
 - 価値
 - 業務
 - 主体
 - データ
-- 判断発生領域
+- 判断発生領域（Judgement Domain）
 
-この時点では、正確さよりも、  
-判断が発生する可能性のある領域を見落とさないことを優先する。
+## 6.3 作成手順
 
----
+1. 顧客・価値を整理する
+2. 業務・主体・データを整理する
+3. 判断発生領域を抽出する
+4. Business Journey（BJ）候補を整理する
+
+## 6.4 運用方針
+
+- 初期は粗く整理してよい
+- JPまで分解しない
+- AI適用は検討しない
+- Discoveryを進めながら更新してよい
+
 
 # 7. ステップ3：Business Journey（BJ）列挙
 
@@ -445,3 +426,4 @@ Phase1ではBJをスコープとしてJPを発見する。
 |---|---|
 | v1.2 | 初版 / 判断ドメインと業務全体像を固定するPhase0 Foundationを定義 / JDA-BMC・BJ一覧・対象BJを成果物として定義 |
 | v1.6 | BJをJP発見スコープとして再定義 / Phase0ではJP抽出・AI適用検討を行わない方針を明確化 / JDA-BMC・Business Journey・Judgement Pointの初出表記を正式名付きに整理 |
+| v1.7 | JDA-BMC定義をPhase0へ統合 / BMC専用文書を廃止 |

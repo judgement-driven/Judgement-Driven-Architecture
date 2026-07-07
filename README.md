@@ -643,8 +643,7 @@ JDAは、そのための判断アーキテクチャである。
 │   ├── 05_phase4_log.md
 │   ├── 06_phase5_implementation.md
 │   ├── 06a_judgement_slice_implementation.md
-│   ├── 07_phase6_learning.md
-│   └── JDA_BMC_definition.md
+│   └── 07_phase6_learning.md
 │
 ├── implementation/
 │   └── BJ01/

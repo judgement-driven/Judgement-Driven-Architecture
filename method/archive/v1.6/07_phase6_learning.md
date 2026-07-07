@@ -1,4 +1,4 @@
-# JDA Method v1.7 — Phase6 Learning
+# JDA Method v1.6 — Phase6 Learning
 
 ---
 
@@ -6,7 +6,7 @@
 
 Phase6 Learning は、Phase5で蓄積された JLog / VLog をもとに、
 
-- Data Sources
+- 判断材料
 - 判断構造
 - 判断基準
 - 判断実行
@@ -33,7 +33,7 @@ JDAのLearningとは、
 ```text
 Discovery（判断抽出）
 ↓
-JULIA（Judgement Scorecard）（判断選定）
+JULIA（判断選定）
 ↓
 Design（判断設計）
 ↓
@@ -87,9 +87,10 @@ JDAは、
 JDAでは、
 以下をLearning対象として扱う。
 
-- Data Sources
-- Conditions
-- Perspectives
+- 判断材料
+- 判断条件（Condition）
+- 判断観点（Perspective）
+- 判断閾値（Threshold）
 - 状態遷移
 - 判断理由
 - 判断パターン
@@ -137,7 +138,7 @@ Learningを段階的に進める。
 
 ---
 
-## 5.0 Stage0 — Learning Foundation
+## 5.0 Stage0 — Validity Capture（妥当性取得）
 
 Learningを成立させるための前提として、
 まずVLogを継続的に取得できる状態を構築する。
@@ -173,7 +174,7 @@ AIは、
 ではなく、
 
 ```text
-Data Sources生成
+判断材料生成
 ```
 
 を改善する。
@@ -186,7 +187,7 @@ Data Sources生成
 - 優先順位
 - 顧客マッチ
 - 類似度
-- Data Sources整理
+- 判断材料整理
 - 過去事例提示
 - アタリ率分析
 
@@ -195,7 +196,7 @@ Data Sources生成
 ### 構造
 
 ```text
-AI → Data Sources
+AI → Material
 Human → Decision
 ```
 
@@ -230,7 +231,8 @@ Human → Confirm
 - 過去類似Case
 - 過去JP結果
 - 状態遷移パターン
-- Perspectives
+- Threshold傾向
+- 判断観点
 - 判断理由
 
 ---
@@ -297,7 +299,7 @@ JDAでは、
 ### ② プロセス妥当性
 
 ```text
-Data Sources・Perspectives・理由が適切だったか
+判断材料・観点・理由が適切だったか
 ```
 
 ---
@@ -357,9 +359,9 @@ VLogは単なる評価ログではない。
 これは：
 
 - AI失敗パターン
-- Data Sources不足
-- Conditions不足
-- Perspectives不足
+- 判断不足
+- Perspective不足
+- Threshold不整合
 
 を発見するための重要情報となる。
 
@@ -372,9 +374,10 @@ VLogは単なる評価ログではない。
 Learningによって、
 以下が更新対象となる。
 
-- Conditions
-- Perspectives
-- Data Sources
+- Condition
+- Perspective
+- Threshold
+- 判断材料
 - 判断理由
 - transition_map
 - decision_options
@@ -425,7 +428,7 @@ JP単体改善が中心だった。
 
 ## 8.2 JJ学習
 
-JDAでは、
+v1.6では、
 
 ```text
 JP連鎖そのもの
@@ -440,7 +443,7 @@ JP連鎖そのもの
 - どのJP順序が成功しやすいか
 - どこで保留が発生するか
 - どのJPで離脱しやすいか
-- どのData Sourcesが後続JPへ影響するか
+- どの判断材料が後続JPへ影響するか
 
 ---
 
@@ -478,7 +481,7 @@ AI学習とは：
 - JLog学習
 - VLog評価
 - 判断再現
-- Data Sources生成改善
+- 判断材料生成改善
 
 である。
 
@@ -498,14 +501,13 @@ AIがLearning
 
 ## 9.4 JDAの特徴
 
-JDAにおけるLearningは、
+JDAでは、
 
 ```text
-AI単体では成立しない
+AI単体ではLearningできない
 ```
 
-JLog・VLog・組織による妥当性評価を前提として、
-Learning Cycleが成立する。
+と考える。
 
 Learningの前提は、
 
@@ -578,7 +580,7 @@ JLog / VLog
 
 ---
 
-## Stage1 — Judgement Material Learning
+## Stage1
 
 ```text
 AI → 類似企業提示
@@ -587,7 +589,7 @@ Human → 営業判断
 
 ---
 
-## Stage2 — Judgement Reproduction Learning
+## Stage2
 
 ```text
 AI → アタリ予測
@@ -596,7 +598,7 @@ Human → 確認
 
 ---
 
-## Stage3 — Judgement Delegation
+## Stage3
 
 ```text
 AI → 優先営業対象決定
@@ -609,7 +611,7 @@ Human → レビュー
 
 - JLogが蓄積されている
 - VLogが評価されている
-- Data Sources精度が改善している
+- 判断材料精度が改善している
 - 判断速度が改善している
 - 判断再現が可能になっている
 - Learning Cycleが継続している
@@ -679,4 +681,3 @@ JDAは、
 | v1.4 | Condition / Perspective / Decision Criteria 更新追加 |
 | v1.5 | Learning Loop強化 / Delegation概念追加 |
 | v1.6 | Judgement Material Learning追加 / JJ学習追加 / VLog妥当性評価拡張 / 段階的Learning構造へ再編 |
-| v1.7 | Stage0をLearning Foundationへ変更 / Learning Cycle名称をCore v1.7（Judgement Material Learning・Judgement Reproduction Learning・Judgement Delegation）へ統一 / Thresholdを正式概念から除外 / 判断材料・Condition・PerspectiveをData Sources・Conditions・Perspectivesへ用語統一 / 「AI単体ではLearningできない」の表現を「JLog・VLog・組織による妥当性評価を前提としてLearning Cycleが成立する」へ修正 / Core v1.7・README v1.7・Phase3〜Phase5との整合 |
