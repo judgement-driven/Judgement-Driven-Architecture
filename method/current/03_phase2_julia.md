@@ -13,8 +13,7 @@ Phase2では、抽出されたJPを多面的に評価し、
 
 * どのJPをPhase3 Designで設計するか
 * どのJPを優先的にログ観測するか
-* どのJPに実装・学習の投資を行うか
-* どのJPを中心に実装見積もりを行うか
+* どのJPを実装対象として選定し、Implementation Planningへ引き継ぐか
 
 を決定する。
 
@@ -42,7 +41,7 @@ JULIAでは、以下の2つを分離して定義する。
 つまりJULIAは、
 
 ```text
-どの判断に投資するか
+どのJPを実装対象として選定するか
 ```
 
 を決めるための工程である。
@@ -77,13 +76,13 @@ Phase5 Implementation や Implementation Pattern に対して、
 ```text
 Discovery（BJをスコープとしてJP抽出）
 ↓
-JULIA（JP評価・投資判断・見積もり前提整理） ← 本フェーズ
+JULIA（JP評価・実装対象JP選定・見積もり前提整理） ← 本フェーズ
 ↓
 Design（判断設計）
 ↓
 Log（ログ設計）
 ↓
-Implementation（実装）
+Implementation（Implementation Planning → 実装）
 ↓
 Learning（学習）
 ```
@@ -91,7 +90,9 @@ Learning（学習）
 ---
 
 > 本フェーズは「分析」ではなく
-> **判断への投資判断**である
+> **実装対象JPの選定**である
+>
+> 投資判断そのものは、実装範囲・見積もりが明らかになった後（Implementation Planning）に行う。
 
 ---
 
@@ -253,7 +254,7 @@ High / Medium / Low
 または、
 
 ```text
-3 / 2 / 1
+5 / 4 / 3 / 2 / 1
 ```
 
 で評価してもよい。
@@ -360,7 +361,7 @@ JLog / VLog を優先的に取得する優先度。
 ## 8.4 Implementationとの関係
 
 JULIAは、JP単位で評価を行い、
-優先的に投資すべき判断を選定する。
+実装対象とすべき判断を選定する。
 
 一方、Implementation（Phase5）は、
 選定されたJP単体だけでは完結しない場合がある。
@@ -372,13 +373,13 @@ JULIAは、JP単位で評価を行い、
 
 ```text
 Phase2 JULIA
-= どのJPに投資するかを決める
+= どのJPを実装対象として選定するかを決める
+
+Implementation Planning
+= 実装対象JPを機能へ分解し、実装範囲・見積もりを整理したうえで投資判断を行う
 
 Phase5 Implementation
-= そのJPをどう実行可能にするかを設計・実装する
-
-Implementation Pattern
-= 選定されたJPを中心に、どう小さく作り始めるかを決める
+= Implementation Planningの結果をもとに、そのJPを実行可能な形で設計・実装する
 ```
 
 ---
@@ -411,13 +412,17 @@ JULIAが決めるのは、
 
 ---
 
-## 8.6 順位付けではなく合意形成のための評価
+## 8.6 目的は実装対象JPの選定であり、順位付けそのものではない
 
-JULIAは、全JPに厳密な順位をつけるための評価ではない。
+JULIAの目的は、Discoveryで抽出したJPの価値を評価し、
+**実装対象となるJPを選定すること**である。
 
-**優先実装JPを説明し、チームで合意形成するための評価**である。
+全JPに厳密な順位をつけることはJULIAの目的ではない。
 
-実務上、最終的な優先度はJULIA表のスコア合計値そのものではなく、
+チームや顧客との合意形成は、この評価プロセスを通じて得られる副次的な効果であり、
+JULIA自体の目的ではない。
+
+実務上、最終的に選定されるJPは、JULIA表のスコア合計値そのものではなく、
 
 * 判断材料がどれだけ具体化しているか
 * 暗黙知がどれだけ集中しているか
@@ -428,12 +433,41 @@ JULIAは、全JPに厳密な順位をつけるための評価ではない。
 そのため、標準運用は以下とする。
 
 ```text
-Top1〜Top3のみを明確に順位付けする
+Top1〜Top3のみを明確に選定する
 それ以外は「次点グループ」として順位をつけずに扱う
 ```
 
-JULIA表とスコアは、この合意形成のための根拠・記録として機能する。
+JULIA表とスコアは、この選定のための根拠・記録として機能する。
 スコアの合計値だけで4位以降まで機械的に順位付けすることは推奨しない。
+
+---
+
+## 8.7 Implementation Planningへの橋渡し
+
+JULIAで選定された実装対象JPは、そのままPhase3 DesignやPhase5 Implementationの詳細に進むわけではない。
+
+JULIAの終了時点では、実装範囲・見積もり・投資判断はまだ確定していない。
+
+これらは、Phase5 Implementationの最初の活動である **Implementation Planning** で行う。
+
+Implementation Planningの役割は以下である。
+
+* 実装対象JPを機能へ分解する
+* 実装範囲を決める
+* 見積もりを行う
+* 投資判断を行う
+
+つまり、
+
+```text
+JULIA
+= 実装対象となるJPを選定する
+
+Implementation Planning
+= 選定されたJPを機能へ分解し、実装範囲・見積もりを整理したうえで投資判断を行う
+```
+
+投資判断は、JULIAの時点ではなく、Implementation Planningを経て初めて行われる。
 
 ---
 
@@ -592,7 +626,7 @@ JULIAの評価結果は、以下の形式で記録する。
 
 ## 12.1 JP共有との関係
 
-v1.6では、JPはBJに従属しない共通判断資産として扱われる可能性がある。
+JDAでは、JPはBJに従属しない共通判断資産として扱われる可能性がある。
 
 ただし、Phase2時点で無理に共通JP化しない。
 
@@ -652,9 +686,9 @@ JSC / JDC / 実装構造を確認しながら行う。
 
 ---
 
-## 14.5 AI化しやすいJPだけを選ぶ
+## 14.5 自動化しやすいJPだけを選ぶ
 
-❌ すぐAI化できるものだけ選ぶ
+❌ すぐ自動化できるものだけ選ぶ
 ⭕ 判断材料学習・ログ蓄積価値も見る
 
 ---
@@ -662,7 +696,7 @@ JSC / JDC / 実装構造を確認しながら行う。
 ## 14.6 実装範囲まで決めてしまう
 
 ❌ JULIAで実装範囲を決め切る
-⭕ JULIAでは主役JPを選定し、実装範囲はImplementation Patternで決める
+⭕ JULIAでは実装対象JPを選定し、実装範囲・見積もり・投資判断はImplementation Planningで決める
 
 ---
 
@@ -691,8 +725,9 @@ JSC / JDC を作成し、判断構造を設計する。
 Phase4 LogでJLog / VLogの取得方法を重点的に設計する。
 
 JULIAで整理した見積もり前提メモは、
-Phase5 Implementation および Implementation Pattern において、
-実装範囲・段階実装・Operational Bridge の検討材料として使用する。
+Phase5 Implementationの最初の活動であるImplementation Planning、
+および続くImplementation Patternにおいて、
+実装範囲・見積もり・投資判断・段階実装・Operational Bridge の検討材料として使用する。
 
 ---
 
@@ -703,4 +738,4 @@ Phase5 Implementation および Implementation Pattern において、
 | v1.4    | 初版 / ROI・Business Impact・Automation Potential・Learning ValueによるJULIA評価を定義 / 設計優先度とログ観測優先度を追加                                                        |
 | v1.6    | JJ内JP評価から、Phase1で抽出したJP評価へ修正 / JULIAとImplementation Patternの責務分離を明確化 / Judgement Slice Implementationとの接続を追加 / 複数BJに跨るJP・共通JP候補の扱いを追加 / 見積もり前提メモを追加 |
 | v1.7    | JULIAをJudgement Scorecardとして整理 /評価軸をJ/U/L/I/Aへ更新 /評価思想・評価例・JULIA表を全面更新 /Core v1.7・READMEとの整合 |
-| v1.8    | JULIAの位置づけを「順位付け」から「優先JPの説明・合意形成のための評価」へ明確化（8.6）/ 「よくある失敗」にスコア合計による機械的順位付けを追加（14.8） |
+| v1.8    | JULIAの位置づけを「実装対象JPの選定」として明確化し、投資判断・合意形成はJULIAの目的ではなく後続または副次的効果であることを整理（8.6）/ Implementation Planning（機能分解・実装範囲・見積もり・投資判断）をPhase5 Implementationの最初の活動として追記（8.7）/ 「よくある失敗」にスコア合計による機械的順位付けを追加（14.8） |
