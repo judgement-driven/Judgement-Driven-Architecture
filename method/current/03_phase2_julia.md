@@ -47,7 +47,7 @@ JULIAでは、以下の2つを分離して定義する。
 を決めるための工程である。
 
 また、JULIAの評価結果は、
-Phase5 Implementationの見積もり前提としても使用される。
+Implementation Planningへの引き渡し情報としても使用される。
 
 ただし、JPは単独で実装されるとは限らない。
 
@@ -76,7 +76,7 @@ Phase5 Implementation や Implementation Pattern に対して、
 ```text
 Discovery（BJをスコープとしてJP抽出）
 ↓
-JULIA（JP評価・実装対象JP選定・見積もり前提整理） ← 本フェーズ
+JULIA（JP評価・実装対象JP選定・引き渡しメモ整理） ← 本フェーズ
 ↓
 Design（判断設計）
 ↓
@@ -102,8 +102,7 @@ Learning（学習）
 * JULIA評価表（JP評価記録）
 * 設計優先度
 * ログ観測優先度
-* 次フェーズへの引き渡しメモ
-* 見積もり前提メモ
+* Implementation Planningへの引き渡しメモ
 
 ---
 
@@ -122,7 +121,7 @@ Phase1で抽出したJP一覧
 ↓
 優先判断リスト作成
 ↓
-見積もり前提整理
+引き渡しメモ整理
 ↓
 JULIA評価表作成
 ```
@@ -379,7 +378,7 @@ Implementation Planning
 = 実装対象JPを機能へ分解し、実装範囲・見積もりを整理したうえで投資判断を行う
 
 Phase5 Implementation
-= Implementation Planningの結果をもとに、そのJPを実行可能な形で設計・実装する
+= Implementation Planningの結果をもとに、JPを実行可能なシステムとして実装する
 ```
 
 ---
@@ -471,24 +470,26 @@ Implementation Planning
 
 ---
 
-# 9. 見積もり前提メモ
+# 9. Implementation Planningへの引き渡しメモ
 
 ## 9.1 目的
 
-見積もり前提メモは、
-JULIAで選定されたJPを実装する際に、
+Implementation Planningへの引き渡しメモは、
+JULIAで選定されたJPをImplementation Planningへ渡す際に、
 どのような要素が実装規模・難易度に影響するかを整理するためのメモである。
 
 これは詳細見積もりではない。
 
-Phase5 Implementation や Judgement Slice Implementation に進む前に、
-見積もりの前提となる情報を整理することを目的とする。
+見積もりそのものはJULIAでは行わず、Implementation Planningで行う。
+
+Phase5 Implementationの最初の活動であるImplementation Planningに進む前に、
+その前提となる情報を整理することを目的とする。
 
 ---
 
 ## 9.2 記録項目
 
-見積もり前提メモには、最低限以下を記録する。
+Implementation Planningへの引き渡しメモには、最低限以下を記録する。
 
 | 項目                   | 内容                           |
 | -------------------- | ---------------------------- |
@@ -507,13 +508,13 @@ Phase5 Implementation や Judgement Slice Implementation に進む前に、
 
 ## 9.3 注意点
 
-見積もり前提メモは、
+Implementation Planningへの引き渡しメモは、
 見積もり金額や工数を確定するためのものではない。
 
 JDAにおける実装は、判断材料・現場運用・VLog設計が実装しながら明確になる場合がある。
 
 そのため、Phase2では詳細見積もりではなく、
-見積もりの不確実性を明らかにすることを重視する。
+Implementation Planningが見積もりを行う際の不確実性を明らかにすることを重視する。
 
 ---
 
@@ -594,7 +595,7 @@ JULIAの評価結果は、以下の形式で記録する。
 * Phase3 Designへの引き渡し
 * Phase4 Logへの引き渡し
 * Phase5 Implementation Patternへの引き渡し
-* 見積もり前提整理
+* Implementation Planningへの引き渡し情報整理
 
 として使用する。
 
@@ -651,7 +652,7 @@ JSC / JDC / 実装構造を確認しながら行う。
 * ログ観測優先度が明確になっている
 * 次に設計するJPが決まっている
 * どのJPを中心に実装を始めるかが分かる
-* 見積もり前提が整理されている
+* Implementation Planningへの引き渡し情報が整理されている
 * 評価理由が記録されている
 
 ---
@@ -703,7 +704,7 @@ JSC / JDC / 実装構造を確認しながら行う。
 ## 14.7 見積もりを確定しようとする
 
 ❌ JULIAで詳細見積もりを確定する
-⭕ JULIAでは見積もり前提と不確実性を整理する
+⭕ JULIAではImplementation Planningへの引き渡し情報と不確実性を整理する
 
 ---
 
@@ -724,7 +725,7 @@ JSC / JDC を作成し、判断構造を設計する。
 また、ログ観測優先度が高いJPについては、
 Phase4 LogでJLog / VLogの取得方法を重点的に設計する。
 
-JULIAで整理した見積もり前提メモは、
+JULIAで整理したImplementation Planningへの引き渡しメモは、
 Phase5 Implementationの最初の活動であるImplementation Planning、
 および続くImplementation Patternにおいて、
 実装範囲・見積もり・投資判断・段階実装・Operational Bridge の検討材料として使用する。
@@ -738,4 +739,4 @@ Phase5 Implementationの最初の活動であるImplementation Planning、
 | v1.4    | 初版 / ROI・Business Impact・Automation Potential・Learning ValueによるJULIA評価を定義 / 設計優先度とログ観測優先度を追加                                                        |
 | v1.6    | JJ内JP評価から、Phase1で抽出したJP評価へ修正 / JULIAとImplementation Patternの責務分離を明確化 / Judgement Slice Implementationとの接続を追加 / 複数BJに跨るJP・共通JP候補の扱いを追加 / 見積もり前提メモを追加 |
 | v1.7    | JULIAをJudgement Scorecardとして整理 /評価軸をJ/U/L/I/Aへ更新 /評価思想・評価例・JULIA表を全面更新 /Core v1.7・READMEとの整合 |
-| v1.8    | JULIAの位置づけを「実装対象JPの選定」として明確化し、投資判断・合意形成はJULIAの目的ではなく後続または副次的効果であることを整理（8.6）/ Implementation Planning（機能分解・実装範囲・見積もり・投資判断）をPhase5 Implementationの最初の活動として追記（8.7）/ 「よくある失敗」にスコア合計による機械的順位付けを追加（14.8） |
+| v1.8    | JULIAの位置づけを「実装対象JPの選定」として明確化し、投資判断・合意形成はJULIAの目的ではなく後続または副次的効果であることを整理（8.6）/ Implementation Planning（機能分解・実装範囲・見積もり・投資判断）をPhase5 Implementationの最初の活動として追記（8.7）/ 「見積もり前提メモ」を「Implementation Planningへの引き渡しメモ」に改称（4, 9章）/ 「よくある失敗」にスコア合計による機械的順位付けを追加（14.8） |
