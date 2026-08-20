@@ -605,6 +605,17 @@ Human → レビュー
 
 ---
 
+## 11.1 実装状況（2026-08-19時点、JP01）
+
+BJ01のJP01（ネタ候補採用判断）で、**Stage0 — Learning Foundationを実装・本番反映した**（実装セッション31）。
+
+- 営業パイプライン側（`brands`/`company_history`、シェアリスト取り込みを含む）で企業の`customer_state`（アタリ／クライアント／NG）が更新されるたびに、JP01で「ネタ採用」済みの同一企業のVLog（後続状態・妥当性）を自動生成・更新する仕組みを追加（`JDA-Bunka-Ad-App-V2` commit `677d096`）
+- これにより、JP01の運用（シェアリストの通常アップロード）を続けるだけで、追加の手入力なしにVLogが継続的に蓄積される状態になった
+- Stage1（Judgement Material Learning：VLog傾向をAIプロンプトへ反映する等）はまだ未着手。10.3節の方針（実装→ログ観測→違和感発見→必要なら概念化）に従い、まずVLogがある程度蓄積されるのを待ってから着手する予定
+- 詳細な実装経緯はProjectの `claude/bj01_jda-bunka-ad-app_handoff.md`（実装セッション31の節）を参照
+
+---
+
 # 12. 成功条件
 
 - JLogが蓄積されている
@@ -680,3 +691,4 @@ JDAは、
 | v1.5 | Learning Loop強化 / Delegation概念追加 |
 | v1.6 | Judgement Material Learning追加 / JJ学習追加 / VLog妥当性評価拡張 / 段階的Learning構造へ再編 |
 | v1.7 | Stage0をLearning Foundationへ変更 / Learning Cycle名称をCore v1.7（Judgement Material Learning・Judgement Reproduction Learning・Judgement Delegation）へ統一 / Thresholdを正式概念から除外 / 判断材料・Condition・PerspectiveをData Sources・Conditions・Perspectivesへ用語統一 / 「AI単体ではLearningできない」の表現を「JLog・VLog・組織による妥当性評価を前提としてLearning Cycleが成立する」へ修正 / Core v1.7・README v1.7・Phase3〜Phase5との整合 |
+| （2026-08-19追記） | 11.1節「実装状況」追加：JP01でStage0（VLog自動蓄積）を実装・本番反映（バージョン番号自体は据え置き、実装セッション31の実証ログとして追記） |
