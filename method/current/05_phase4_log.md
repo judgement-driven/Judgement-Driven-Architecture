@@ -328,6 +328,8 @@ JLogでは、判断結果だけでなく、判断時点で利用可能であっ�
 
 AIが提示した情報だけでなく、システムが取得した情報、過去履歴、照合結果、人間が参照した情報など、判断時点で利用可能であった情報全体を含む。
 
+判断時点で取得できなかった判断材料がある場合は、何が欠けていたかと、把握できた欠損理由（取得失敗・未取得・該当情報なし等）も記録する。
+
 例：
 
 - AIが提示した候補
@@ -975,4 +977,4 @@ Phase6 Learningへ接続される。
 |---|---|
 | v1.3 | 初版 / JLog・VLogを定義 / State遷移とログの関係を追加 |
 | v1.6 | Proposal / State / execute_jpとの接続を追加 / VLogを結果妥当性・プロセス妥当性・修正妥当性に整理 / 軽量評価方針を追加 / Phase6 Learningへの接続を明確化 / 判断材料学習・判断再現学習・判断委譲への接続を追加 |
-| v1.7 | 判断スナップショット（Judgement Snapshot）概念追加 / JLog4層構造（Exploration Context / Candidate Snapshot / Decision Context / Judgement）をMethodレベルで定義 |
+| v1.7 | 判断スナップショット（Judgement Snapshot）概念追加 / JLog4層構造（Exploration Context / Candidate Snapshot / Decision Context / Judgement）をMethodレベルで定義 / 材料欠損の記録を明文化 |

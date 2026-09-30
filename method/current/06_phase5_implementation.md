@@ -229,6 +229,10 @@ state_version は、同時更新や不整合を防ぐための楽観ロックに
 
 以下はBJ01（新規クライアント獲得）における実装例である。対象BJによって登録経路は異なる。
 
+Company × Campaignは、BJ01におけるProposalの具体構造の例であり、すべてのBJに共通する固定構造ではない。ProposalはCaseを実行系に具体化したインスタンスであり、その具体構造は対象BJごとに定義する。
+
+実装上の名称や保存先が異なる場合も、概念上のCase / Proposalとの対応を明確にし、判断対象・State・JLog / VLogを追跡できるようにする。
+
 ### 企画起点
 
 ```text
@@ -408,6 +412,8 @@ Phase2 JULIAで主要JPを選定する
 対象JPを確認する
 ↓
 対象JPに必要なData Sourcesを定義する
+↓
+判断設計から必要なタスク・実行フローを具体化する
 ↓
 最小限のProposal / State / JLog / VLogを実装する
 ↓
@@ -680,9 +686,69 @@ Judgement Slice Implementationでは、JPの優先順位そのものは決定し
 
 この段階で重要なのは、AIが判断することではなく、人間が判断しやすくなる材料を整えることである。
 
-## 11.3 Step3：最小実行構造を作る
+## 11.3 Step3：Judgement Sliceのタスク・実行フローを設計する
 
-主要JPを運用可能にするために必要な最小構造を作る。
+主要JPのJSC・JDCおよびPhase4のログ設計をもとに、その判断を現場で運用するために必要なタスクを具体化する。
+
+対象は、以下の三つの側面から確認する。
+
+1. Data Sourcesから、材料の取得・整理・照合・提示に必要なタスクを洗い出す。
+2. JSC・JDCとログ設計から、判断の実行・状態遷移・JLog記録に必要な処理を定める。
+3. OutputとVLog設計から、後続アクション、結果の追跡、妥当性評価に必要なタスクを洗い出す。
+
+各タスクについて、実行条件、入力・出力、担い手、必要なタイミング、完了条件を定める。
+
+基本的な接続は以下となる。
+
+```text
+材料取得・整理
+↓
+提示
+↓
+判断
+↓
+状態遷移・JLog記録
+↓
+後続アクション
+```
+
+後続の結果は、判断記録と対応づけてVLogによる評価へ接続する。
+
+この接続は、すべてを同期・直列で実行することを意味しない。材料の事前取得、複数JPでの共有、並列処理、非同期実行、追加情報を取得しての再判断を認める。
+
+### execute_jpとの境界
+
+execute_jpは、対象の現在状態・状態バージョンを確認し、渡された判断材料を用いて判断を実行し、状態遷移・JLog記録・結果返却を担う。判断材料の取得・整理と、判断結果に基づく後続アクションは、その前後のタスクとして扱う。
+
+判断の途中で追加情報が必要になった場合も、取得処理をexecute_jpへ集約せず、追加取得と再判断の接続を設計する。
+
+### 取得失敗と材料欠損の記録
+
+材料取得に失敗した場合は、再試行・保留・人への引き継ぎなどの扱いを定める。材料が欠けたまま判断する場合は、欠損内容と把握できた理由をJudgement Snapshotに残す。判断が実行されていない取得失敗は、タスクの実行記録として扱い、判断結果と混同しない。
+
+取得失敗、未取得、該当情報なしは、判断への影響が異なる場合に区別する。後続アクションなどの実行失敗についても、再試行・保留・人への引き継ぎなどの扱いを定める。
+
+### タスク実行状況と判断状態の分離
+
+判断の確定と後続タスクの成功は区別する。登録・通知などの後続タスクの待機・実行中・成功・失敗は、原則としてタスクの実行状況として管理し、主要JPの判断状態とは分離する。タスクの成功・失敗によって、確定済みの判断結果を上書きしない。
+
+例えば、採用判断後の登録処理が失敗しても、判断は「採用済み」、登録タスクは「失敗」として追跡する。採用済みであることと登録未完了であることをそれぞれ追跡できるようにする。
+
+一方、作業結果を材料に「納品を完了と認めるか」などの業務上の判断を行う場合、その判断が確定させる状態はJSCの対象になり得る。タスク完了そのものと、完了結果に基づく業務判断を区別する。
+
+### 実装範囲と判断設計への接続
+
+タスクを具体化する際は、新規実装、既存機能の利用、現場運用による補完を選択する。未実装工程は必要に応じてOperational Bridgeで接続する。
+
+Judgement Sliceは、主要JPを運用可能にするための実装範囲である。各JPについて専用の取得処理や後続処理を重複して作ることは求めない。
+
+判断設計のみで実装方法が一意に決まるわけではない。既存システム、現場運用、技術上の制約を踏まえて実現方法を選ぶ。具体化の過程で判断設計の不足が見つかった場合は、Phase3へ戻って見直す。
+
+タスクの中に独立した業務上の判断が見つかった場合は、必要に応じてJP候補としてPhase1 Discoveryへ戻す。
+
+## 11.4 Step4：現場運用に必要な最小実行構造を作る
+
+Step3で具体化したタスク・実行フローのうち、主要JPを現場で運用するために必要な最小構成を実装する。新規実装する部分、既存機能を利用する部分、Operational Bridgeで補完する部分を選び、洗い出したタスクをすべて新規実装することは求めない。
 
 最低限必要なものは以下である。
 
@@ -697,7 +763,7 @@ Judgement Slice Implementationでは、JPの優先順位そのものは決定し
 - UI
 - import/export または既存運用との接続
 
-## 11.4 Step4：前後工程をOperational Bridgeで補完する
+## 11.5 Step5：前後工程をOperational Bridgeで補完する
 
 主要JPの前後に未実装工程がある場合、すべてをシステム化しない。
 
@@ -713,7 +779,7 @@ Judgement Slice Implementationでは、JPの優先順位そのものは決定し
 
 この場合でも、主要JPの判断は可能な限りハーネス上で実行し、JLog / VLogに接続する。
 
-## 11.5 Step5：現場で運用する
+## 11.6 Step6：現場で運用する
 
 小さく実装したら、現場に使ってもらう。
 
@@ -721,7 +787,7 @@ Judgement Slice Implementationでは、JPの優先順位そのものは決定し
 
 現場が判断できること、Data Sourcesが提示されること、判断理由が残ることを優先する。
 
-## 11.6 Step6：JLog / VLogを観測する
+## 11.7 Step7：JLog / VLogを観測する
 
 運用後、以下を観測する。
 
@@ -734,7 +800,7 @@ Judgement Slice Implementationでは、JPの優先順位そのものは決定し
 - Operational Bridgeで十分か
 - ハーネスに接続できているか
 
-## 11.7 Step7：必要な周辺JPだけ追加する
+## 11.8 Step8：必要な周辺JPだけ追加する
 
 ログと運用の違和感から、必要な周辺JPの実行環境だけを追加する。
 
@@ -750,7 +816,7 @@ Learningにつながるか
 
 である。
 
-## 11.8 Step8：JJとして整理する
+## 11.9 Step9：JJとして整理する
 
 複数JPが連鎖して動き始めたら、それを Judgement Journey（JJ）として整理する。
 
@@ -901,6 +967,8 @@ Phase5の成功条件は以下である。
 - JJがProposal上のJP実行連鎖として観測できる
 - 主要JPがJudgement Sliceとして最小構成で運用できている
 - Operational Bridgeを使う場合でもJudgement Harnessに接続できている
+- 判断材料の取得から判断後のアクションまで、必要なタスクと受け渡しが明確になっている
+- 判断の確定とタスクの実行状況を区別し、材料欠損や処理失敗を追跡できる
 
 ---
 
@@ -976,6 +1044,10 @@ Phase5の成功条件は以下である。
 ❌ JPを作る = 判断をシステムが作る
 ⭕ JPを運用可能にする = Data Sources提示・入力・状態遷移・ログ収集を作る
 
+## 17.15 タスクを具体化する過程で、判断設計との対応を失う
+
+処理手順だけを実装し、判断対象・材料・結果・責任・記録が不明確になることを避ける。タスクから判断を発見すること自体は問題ではなく、発見した判断をJPとして整理し、必要に応じてPhase1 Discovery・Phase3 Designへ戻す。
+
 ---
 
 # 18. 次工程
@@ -1006,4 +1078,4 @@ Learning Cycle
 | v1.4 | Judgement Harness の導入 / 実行単位をProposalに変更 / execute_jp共通基盤の定義 / Judgement Injection概念追加 |
 | v1.5 | Judgement Injection / JP共有構造 / Judgement Harness実装検証 |
 | v1.6 | 判断実行 + 学習アーキテクチャへ拡張 / resolve_jp削除 / JJ形成 / AI支援・再現・委譲段階の反映 / Judgement Slice Implementation・Operational Bridgeを別文書（06a_judgement_slice_implementation.md）として定義 |
-| v1.7 | Phase5 ImplementationとJudgement Slice Implementationを統合 / 06a_judgement_slice_implementation.mdを廃止 / Judgement Slice ImplementationをPhase5内の実装パターンとして整理 / Operational BridgeをPhase5内に統合 / Learning Cycle名称をCore v1.7（Judgement Material Learning・Judgement Reproduction Learning・Judgement Delegation）へ統一 / 判断材料をData Sourcesへ、Condition・PerspectiveをConditions・Perspectivesへ用語統一 / Thresholdを正式概念から除外 / Core v1.7・README v1.7との整合 |
+| v1.7 | Phase5 ImplementationとJudgement Slice Implementationを統合 / 06a_judgement_slice_implementation.mdを廃止 / Judgement Slice ImplementationをPhase5内の実装パターンとして整理 / Operational BridgeをPhase5内に統合 / Learning Cycle名称をCore v1.7（Judgement Material Learning・Judgement Reproduction Learning・Judgement Delegation）へ統一 / 判断材料をData Sourcesへ、Condition・PerspectiveをConditions・Perspectivesへ用語統一 / Thresholdを正式概念から除外 / Core v1.7・README v1.7との整合 / Judgement Sliceのタスク・実行フロー設計をStep3に追加し、実装順序をStep1〜9へ整理 / execute_jpと前後タスクの境界、取得失敗・材料欠損の記録、タスク実行状況と判断状態の分離を明文化 / 最小実装・基本フロー・成功条件・失敗例への反映 / Proposalの具体構造と実装上の名称・保存先の対応を補足（v1.7の明文化） |
