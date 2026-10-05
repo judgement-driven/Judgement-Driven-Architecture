@@ -293,7 +293,7 @@ AIは判断材料を提示し、 人間が判断する。
 ## 8.3 Judgement Reproduction Learning
 
 ``` text
-AI → Suggested Decision → Human Confirm
+AI → Suggested Judgement → Human Confirm
 ```
 
 AIが過去JLogから 判断再現を試みる。
