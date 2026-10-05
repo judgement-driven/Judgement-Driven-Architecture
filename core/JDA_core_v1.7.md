@@ -416,10 +416,12 @@ JULIAは、限られたリソースの中で、
 
 ```text
 評価単位：JP
-実装単位：BJ
+実装単位：JP（主要JPを中心としたJudgement Slice）
 ```
 
 とする。
+
+BJは判断発見のスコープであり、実装の単位ではない。実装は、JULIAで選定した主要JPを中心に、Judgement Sliceとして小さく始める。
 
 ---
 
@@ -551,7 +553,7 @@ AIは以下を支援する。
 ## 9.2 Stage2：Judgement Reproduction Learning（再現段階）
 
 ```text
-AI → Suggested Decision → Human Confirm
+AI → Suggested Judgement → Human Confirm
 ```
 
 過去JLogから、  
@@ -644,4 +646,4 @@ JDAとは、
 | v1.4 | Learning Loop / Delegation / Venture Judgement 強化 |
 | v1.5 | Judgement Harnessおよび Judgement Injection の検討開始（実装検証フェーズ） |
 | v1.6 | 判断実行 + 学習アーキテクチャへ拡張 / BJ-JP N:M構造 / 共通JP実行 / Learning Cycle統合 |
-| v1.7 | JULIAをJudgement Scorecardとして正式定義 / JSCを判断対象（Target）起点のState Chart定義へ統一 / Judgement Snapshot（Exploration Context・Candidate Snapshot・Decision Context・Judgement）を正式追加 / Learning CycleへStage0（Learning Foundation）を追加し、Stage1〜3をJudgement Material Learning・Judgement Reproduction Learning・Judgement Delegationへ統一 / JSC・JDCの責務整理を新設し、Proceed・Validity・Accountability・Venture（Judgement Dimensions）の4軸構造をJDCの正式構造から除外（履歴として保持、v1.8以降で再検討） / JDCをPurpose・Subject・Data Sources・Conditions・Perspectives・Decision・Actor・Accountability・Outputの9要素で再定義 / 「Judgement Definition Canvas」を「Judgement Design Canvas」へ名称修正 / 判断材料・Condition・PerspectiveをData Sources・Conditions・Perspectivesへ用語統一 / Thresholdを正式概念から除外 / execute_jpのパラメータをinput_dataからdata_sourcesへ統一 / Dynamic Data Sources（Hypothesis Injection）をv1.7正式概念から除外し、Hypothesis・Perspective/Hypothesis Framework・JSC拡張とあわせてv1.8 Considerationsへ移動 / Phase3〜Phase6・README v1.7との整合 |
+| v1.7 | JULIAをJudgement Scorecardとして正式定義 / JSCを判断対象（Target）起点のState Chart定義へ統一 / Judgement Snapshot（Exploration Context・Candidate Snapshot・Decision Context・Judgement）を正式追加 / Learning CycleへStage0（Learning Foundation）を追加し、Stage1〜3をJudgement Material Learning・Judgement Reproduction Learning・Judgement Delegationへ統一 / JSC・JDCの責務整理を新設し、Proceed・Validity・Accountability・Venture（Judgement Dimensions）の4軸構造をJDCの正式構造から除外（履歴として保持、v1.8以降で再検討） / JDCをPurpose・Subject・Data Sources・Conditions・Perspectives・Decision・Actor・Accountability・Outputの9要素で再定義 / 「Judgement Definition Canvas」を「Judgement Design Canvas」へ名称修正 / 判断材料・Condition・PerspectiveをData Sources・Conditions・Perspectivesへ用語統一 / Thresholdを正式概念から除外 / execute_jpのパラメータをinput_dataからdata_sourcesへ統一 / Dynamic Data Sources（Hypothesis Injection）をv1.7正式概念から除外し、Hypothesis・Perspective/Hypothesis Framework・JSC拡張とあわせてv1.8 Considerationsへ移動 / Phase3〜Phase6・README v1.7との整合 / 5.3の実装単位をJP（Judgement Slice）へ修正し、BJは発見スコープであることを明記 / Stage2の表記をSuggested Judgementへ統一（v1.7の明文化） |
