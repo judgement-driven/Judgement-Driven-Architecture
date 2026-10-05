@@ -908,7 +908,7 @@ JDAでは、AIの役割を段階的に捉える。
 JLog / VLog が蓄積されると、AIは過去の判断をもとに判断再現を試みる。
 
 ```text
-AI → Suggested Decision → Human Confirm
+AI → Suggested Judgement → Human Confirm
 ```
 
 ## 14.3 Judgement Delegation（委譲段階）
