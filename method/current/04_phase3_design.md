@@ -1,4 +1,4 @@
-# JDA Method v1.7 — Phase3 Design
+# JDA Method v1.7.1 — Phase3 Design
 
 ---
 
@@ -33,13 +33,13 @@ JLog / VLog に接続される構造として設計する。
 ```text
 Discovery（BJをスコープとしてJP抽出）
 ↓
-JULIA（JP評価・投資判断）
+JULIA（JP評価・実装対象JP選定）
 ↓
 Design（判断設計） ← 本フェーズ
 ↓
 Log（ログ設計）
 ↓
-Implementation（実装）
+Implementation（実装計画 → 実装・運用）
 ↓
 Learning（学習）
 ```
@@ -977,3 +977,4 @@ JLog / VLog の記録項目・記録タイミング・評価方法を設計す�
 | v1.3 | 初版 / JSC・JDC・Case定義を追加 / 判断を状態遷移として扱う設計を定義 |
 | v1.6 | Case / Proposal の関係を明確化 / JDCをJudgement Design Canvasとして再定義 / 判断主体と判断責任を分離 / execute_jp・JLog・VLog・Judgement Slice Implementationへの接続を追加 / AIを判断材料支援から始める方針を明記 |
 | v1.7 | JDCをフラット構造へ変更 / Proceed・Validity・Accountability・Venture構造をJDCの正式構造としては不採用とし、旧内容をDecision / Output / Data Sources / Conditions / Perspectives / Actor / Accountabilityへ整理 / JDCをPurpose・Subject・Data Sources・Conditions・Perspectives・Decision・Actor・Accountability・Outputの9要素へ再定義 / 「判断確定方式」を正式項目から除外し、Actorの運用形態として整理 / JSC定義をCore v1.7（判断対象＝TargetとState Chart表現）に統一 / Phase4 LogのJudgement Snapshotとの接続を明記 / Core v1.7・README v1.7との整合 / Data Sourcesの取得要件・材料欠損のJudgement Snapshot記録設計、Outputの後続アクション要件を明文化 / 判断確定と後続アクション完了を区別 / Phase5のタスク・実行フロー設計と最小実装への接続、Phase3への見直しを追記 / JSCと処理手順の役割分担を明確化（v1.7の明文化） |
+| v1.7.1 | 位置づけ図のJULIAとImplementationの役割を、対象選定・実装計画の整理に合わせて更新 |
