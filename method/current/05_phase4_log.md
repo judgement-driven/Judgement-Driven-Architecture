@@ -1,4 +1,4 @@
-# JDA Method v1.7 — Phase4 Log
+# JDA Method v1.7.1 — Phase4 Log
 
 ---
 
@@ -38,13 +38,13 @@ JDAでは、判断を行うだけでは不十分である。
 ```text
 Discovery（BJをスコープとしてJP抽出）
 ↓
-JULIA（JP評価・投資判断）
+JULIA（JP評価・実装対象JP選定）
 ↓
 Design（判断設計）
 ↓
 Log（ログ設計） ← 本フェーズ
 ↓
-Implementation（実装）
+Implementation（実装計画 → 実装・運用）
 ↓
 Learning（学習）
 ```
@@ -978,3 +978,4 @@ Phase6 Learningへ接続される。
 | v1.3 | 初版 / JLog・VLogを定義 / State遷移とログの関係を追加 |
 | v1.6 | Proposal / State / execute_jpとの接続を追加 / VLogを結果妥当性・プロセス妥当性・修正妥当性に整理 / 軽量評価方針を追加 / Phase6 Learningへの接続を明確化 / 判断材料学習・判断再現学習・判断委譲への接続を追加 |
 | v1.7 | 判断スナップショット（Judgement Snapshot）概念追加 / JLog4層構造（Exploration Context / Candidate Snapshot / Decision Context / Judgement）をMethodレベルで定義 / 材料欠損の記録を明文化 |
+| v1.7.1 | 位置づけ図のJULIAとImplementationの役割を、対象選定・実装計画の整理に合わせて更新 |
