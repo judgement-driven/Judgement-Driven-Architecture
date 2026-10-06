@@ -1,4 +1,4 @@
-# JDA Method v1.7 — Phase2 JULIA
+# JDA Method v1.7.1 — Phase2 JULIA
 
 ---
 
@@ -163,6 +163,8 @@ Judgement ROI =
 ```
 
 Jは経済的価値そのものを見る軸であり、発生頻度そのものはU（Urgency & Frequency）で別途評価する。
+
+ここでは、想定される効果を概算・相対比較する。実装費用がまだ確定していないため、この評価だけで実装への投資を決定しない。見積もりを踏まえた判断は、Phase5の実装計画（Implementation Planning）で行う。
 
 短期的な経済価値が低くても、
 Adaptive / Learning Value（A）が高いJPは、将来的に大きな価値を持つ可能性がある。
@@ -374,11 +376,11 @@ JULIAは、JP単位で評価を行い、
 Phase2 JULIA
 = どのJPを実装対象として選定するかを決める
 
-Implementation Planning
-= 実装対象JPを機能へ分解し、実装範囲・見積もりを整理したうえで投資判断を行う
-
 Phase5 Implementation
-= Implementation Planningの結果をもとに、JPを実行可能なシステムとして実装する
+= 実装計画（Implementation Planning）と、その結果に基づく実装・運用を行う
+
+実装計画（Implementation Planning）
+= Phase5の最初の活動。実装対象JPに必要な機能・タスクを整理し、実装範囲・見積もりを踏まえて投資判断を行う
 ```
 
 ---
@@ -408,6 +410,8 @@ JULIAが決めるのは、
 * 必要な周辺JP
 
 をどの範囲で実装するかを決める。
+
+実装範囲・見積もり・投資判断はPhase5の実装計画で整理し、その結果に基づいて、Judgement Slice Implementationで小さく実装・運用する。
 
 ---
 
@@ -443,7 +447,7 @@ JULIA表とスコアは、この選定のための根拠・記録として機能
 
 ## 8.7 Implementation Planningへの橋渡し
 
-JULIAで選定された実装対象JPは、そのままPhase3 DesignやPhase5 Implementationの詳細に進むわけではない。
+JULIAで選定された実装対象JPは、Phase3で判断を、Phase4で記録・評価を設計する。Phase2の引き渡しメモに、そこで分かったことを加え、Phase5の最初の活動である実装計画へ渡す。
 
 JULIAの終了時点では、実装範囲・見積もり・投資判断はまだ確定していない。
 
@@ -466,7 +470,7 @@ Implementation Planning
 = 選定されたJPを機能へ分解し、実装範囲・見積もりを整理したうえで投資判断を行う
 ```
 
-投資判断は、JULIAの時点ではなく、Implementation Planningを経て初めて行われる。
+実装範囲と見積もりを踏まえた投資判断は、JULIAの時点ではなく、Phase5の実装計画（Implementation Planning）の中で行う。
 
 ---
 
@@ -485,6 +489,8 @@ JULIAで選定されたJPをImplementation Planningへ渡す際に、
 Phase5 Implementationの最初の活動であるImplementation Planningに進む前に、
 その前提となる情報を整理することを目的とする。
 
+Phase2時点で不明な項目は、不明と記録する。Phase3・Phase4の設計と、Phase5の実装計画で具体化する。詳細設計や実装範囲の確定を、このメモの完成条件にはしない。
+
 ---
 
 ## 9.2 記録項目
@@ -502,7 +508,7 @@ Implementation Planningへの引き渡しメモには、最低限以下を記録
 | Operational Bridge候補 | Excel / CSV / 既存管理表 / 手動運用など |
 | AI補強の必要性             | 判断材料生成にAIが必要か                |
 | 実装上の不確実性             | UI、データ、運用、責任分界などの不確実性        |
-| 段階実装方針               | 最初にどこまで作るか                   |
+| 段階実装方針               | 最初の実装範囲に関する仮説・制約（確定はPhase5） |
 
 ---
 
@@ -726,8 +732,8 @@ JSC / JDC を作成し、判断構造を設計する。
 Phase4 LogでJLog / VLogの取得方法を重点的に設計する。
 
 JULIAで整理したImplementation Planningへの引き渡しメモは、
-Phase5 Implementationの最初の活動であるImplementation Planning、
-および続くImplementation Patternにおいて、
+Phase3・Phase4で分かったことを加えたうえで、
+Phase5 Implementationの最初の活動である実装計画（Implementation Planning）において、
 実装範囲・見積もり・投資判断・段階実装・Operational Bridge の検討材料として使用する。
 
 ---
@@ -739,4 +745,4 @@ Phase5 Implementationの最初の活動であるImplementation Planning、
 | v1.4    | 初版 / ROI・Business Impact・Automation Potential・Learning ValueによるJULIA評価を定義 / 設計優先度とログ観測優先度を追加                                                        |
 | v1.6    | JJ内JP評価から、Phase1で抽出したJP評価へ修正 / JULIAとImplementation Patternの責務分離を明確化 / Judgement Slice Implementationとの接続を追加 / 複数BJに跨るJP・共通JP候補の扱いを追加 / 見積もり前提メモを追加 |
 | v1.7    | JULIAをJudgement Scorecardとして整理 /評価軸をJ/U/L/I/Aへ更新 /評価思想・評価例・JULIA表を全面更新 /Core v1.7・READMEとの整合 |
-| v1.8    | JULIAの位置づけを「実装対象JPの選定」として明確化し、投資判断・合意形成はJULIAの目的ではなく後続または副次的効果であることを整理（8.6）/ Implementation Planning（機能分解・実装範囲・見積もり・投資判断）をPhase5 Implementationの最初の活動として追記（8.7）/ 「見積もり前提メモ」を「Implementation Planningへの引き渡しメモ」に改称（4, 9章）/ 「よくある失敗」にスコア合計による機械的順位付けを追加（14.8） |
+| v1.7.1  | JULIAの役割を実装対象JPの選定として明確化し、設計優先度・ログ観測優先度との関係を整理 / 実装範囲・見積もり・投資判断をPhase5の実装計画（Implementation Planning）で扱うことを明記 / 引き渡しメモの位置づけとPhase3・Phase4を経た接続を整理 / Top1〜Top3の選定と次点グループの扱いを明確化し、スコア合計による全JPの機械的順位付けを避ける方針を記載 / v1.8として記載していた変更を、v1.7.1の改訂として整理 |
