@@ -1,4 +1,4 @@
-# JDA Method v1.7 Overview
+# JDA Method v1.7.1 Overview
 
 ------------------------------------------------------------------------
 
@@ -81,9 +81,9 @@ JDAは以下のフェーズで構成される。
 ## phase2 JULIA (Judgement Scorecard)
 
 -   JPの評価
--   優先順位付け
--   投資判断
--   実装対象の選定
+-   実装対象JPの選定
+-   設計優先度・ログ観測優先度の整理
+-   実装計画への引き渡しメモ
 
 ------------------------------------------------------------------------
 
@@ -106,6 +106,7 @@ JDAは以下のフェーズで構成される。
 
 ## phase5 implementation
 
+-   実装計画（Implementation Planning）：必要な機能・タスク、実装範囲、段階実装、見積もり、投資判断
 -   共通JP実行基盤（ハーネス）の構築
 -   execute_jpによる統一実行
 -   Judgement Injection
@@ -135,13 +136,13 @@ Business Journey（BJ）
 ↓
 Judgement Point（JP）抽出
 ↓
-JULIA
+JULIA（実装対象JP選定）
 ↓
 Design
 ↓
 Log
 ↓
-Implementation（JJ形成）
+Implementation（実装計画 → 実装・運用、JJ形成）
 ↓
 Learning
 ```
@@ -435,4 +436,8 @@ execute_jp は：
                                       JP一覧・精査記録との関係を整理 /
                                       企業ジャーニーの英語名称を
                                       Operations Journeyに統一
+
+  v1.7.1                              Phase2の対象選定とPhase5の
+                                      実装計画・投資判断の責務を整理し、
+                                      フェーズ一覧と全体図を更新
   -----------------------------------------------------------------------
