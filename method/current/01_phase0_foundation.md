@@ -1,4 +1,4 @@
-# JDA Method v1.7 — Phase0 Foundation
+# JDA Method v1.7.1 — Phase0 Foundation
 
 ---
 
@@ -319,7 +319,7 @@ BJ07 入金確認・消込
 ## 8.5 Phase2 JULIAとの違い
 
 Phase0で対象BJを選ぶことは、  
-JPの投資優先度を決めることではない。
+個々の判断の優先度や実装対象を決めることではない。
 
 Phase0では、
 
@@ -427,3 +427,4 @@ Phase1ではBJをスコープとしてJPを発見する。
 | v1.2 | 初版 / 判断ドメインと業務全体像を固定するPhase0 Foundationを定義 / JDA-BMC・BJ一覧・対象BJを成果物として定義 |
 | v1.6 | BJをJP発見スコープとして再定義 / Phase0ではJP抽出・AI適用検討を行わない方針を明確化 / JDA-BMC・Business Journey・Judgement Pointの初出表記を正式名付きに整理 |
 | v1.7 | JDA-BMC定義をPhase0へ統合 / BMC専用文書を廃止 |
+| v1.7.1 | Phase2との比較を「投資優先度」から、判断の優先度・実装対象の選定へ修正 |
