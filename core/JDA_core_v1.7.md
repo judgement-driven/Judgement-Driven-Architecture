@@ -1,6 +1,8 @@
-# JDA Core v1.7
+# JDA Core v1.7.1
 
 ## Judgement-Driven Architecture
+
+v1.7系列の現行改訂版：v1.7.1（ファイル名は `JDA_core_v1.7.md` のまま維持）
 
 ---
 
@@ -330,7 +332,7 @@ BJ-B ─┘
 
 JDAでは、
 
-> どの判断に投資するか
+> どの判断を優先して扱うか
 
 を中心に設計する。
 
@@ -338,14 +340,11 @@ JDAでは、
 
 ## 5.1 Judgement Investment
 
-JDAでは、
+JDAでは、判断の改善・実装・学習に、限られた資源をどう配分するかを考える。
 
-「どの判断へ投資するか」
-
-を中心に設計する。
-
-JULIAは、
-判断改善・判断実装・判断学習への投資優先度を決定するための仕組みである。
+JULIAは、そのうち、判断の価値を評価して実装対象JPを選ぶ役割を担う。
+実装範囲と見積もりを踏まえて資源の投入を決める投資判断は、
+JDA MethodのPhase5における実装計画（Implementation Planning）で行う。
 
 ---
 
@@ -372,7 +371,8 @@ JDAでは、
 を同一視しない。
 
 JULIAは、限られたリソースの中で、
-どの判断へ投資するかを決定するために用いる。
+どのJPを実装対象として選ぶかを決定するために用いる。
+実装範囲と見積もりを踏まえた投資判断は、MethodのPhase5で行う。
 
 評価軸：
 
@@ -647,3 +647,4 @@ JDAとは、
 | v1.5 | Judgement Harnessおよび Judgement Injection の検討開始（実装検証フェーズ） |
 | v1.6 | 判断実行 + 学習アーキテクチャへ拡張 / BJ-JP N:M構造 / 共通JP実行 / Learning Cycle統合 |
 | v1.7 | JULIAをJudgement Scorecardとして正式定義 / JSCを判断対象（Target）起点のState Chart定義へ統一 / Judgement Snapshot（Exploration Context・Candidate Snapshot・Decision Context・Judgement）を正式追加 / Learning CycleへStage0（Learning Foundation）を追加し、Stage1〜3をJudgement Material Learning・Judgement Reproduction Learning・Judgement Delegationへ統一 / JSC・JDCの責務整理を新設し、Proceed・Validity・Accountability・Venture（Judgement Dimensions）の4軸構造をJDCの正式構造から除外（履歴として保持、v1.8以降で再検討） / JDCをPurpose・Subject・Data Sources・Conditions・Perspectives・Decision・Actor・Accountability・Outputの9要素で再定義 / 「Judgement Definition Canvas」を「Judgement Design Canvas」へ名称修正 / 判断材料・Condition・PerspectiveをData Sources・Conditions・Perspectivesへ用語統一 / Thresholdを正式概念から除外 / execute_jpのパラメータをinput_dataからdata_sourcesへ統一 / Dynamic Data Sources（Hypothesis Injection）をv1.7正式概念から除外し、Hypothesis・Perspective/Hypothesis Framework・JSC拡張とあわせてv1.8 Considerationsへ移動 / Phase3〜Phase6・README v1.7との整合 / 5.3の実装単位をJP（Judgement Slice）へ修正し、BJは発見スコープであることを明記 / Stage2の表記をSuggested Judgementへ統一（v1.7の明文化） |
+| v1.7.1 | JULIAの役割を実装対象JPの選定へ明確化し、実装範囲・見積もりを踏まえた投資判断はMethod Phase5の実装計画（Implementation Planning）で扱うことを明記 |
