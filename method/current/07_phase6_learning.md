@@ -573,7 +573,7 @@ JLog / VLog
 
 # 11. 例（BJ01）
 
-以下はBJ01（新規クライアント獲得）における実装例である。
+以下は、BJ01（新規クライアント獲得）にLearning Cycleを適用した場合の、段階ごとのイメージである。実装済みの範囲は11.1に示す。
 対象BJによって具体的な内容は異なる。
 
 ---
@@ -692,4 +692,4 @@ JDAは、
 | v1.6 | Judgement Material Learning追加 / JJ学習追加 / VLog妥当性評価拡張 / 段階的Learning構造へ再編 |
 | v1.7 | Stage0をLearning Foundationへ変更 / Learning Cycle名称をCore v1.7（Judgement Material Learning・Judgement Reproduction Learning・Judgement Delegation）へ統一 / Thresholdを正式概念から除外 / 判断材料・Condition・PerspectiveをData Sources・Conditions・Perspectivesへ用語統一 / 「AI単体ではLearningできない」の表現を「JLog・VLog・組織による妥当性評価を前提としてLearning Cycleが成立する」へ修正 / Core v1.7・README v1.7・Phase3〜Phase5との整合 |
 | （2026-08-19追記） | 11.1節「実装状況」追加：JP01でStage0（VLog自動蓄積）を実装・本番反映（バージョン番号自体は据え置き、実装セッション31の実証ログとして追記） |
-| v1.7.1 | Method文書群をv1.7.1へ統一し、位置づけ図のImplementation表記を更新（Learningの手順変更なし） |
+| v1.7.1 | Method文書群をv1.7.1へ統一し、位置づけ図のImplementation表記を更新（Learningの手順変更なし） / 11章の例を「段階ごとのイメージ」と明記し、実装済みの範囲は11.1に示すと追記 |
