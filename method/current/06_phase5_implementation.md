@@ -111,7 +111,7 @@ JDAでは、各画面や各機能に個別の判断ロジックを埋め込む�
 
 Judgement Harness の特徴は、Judgement Injectionによって、JP定義と実行基盤を分離している点にある。
 
-これにより、JPはコードではなく定義として管理され、Judgement Harness を変更せずにJPを追加・更新できる。
+これにより、JPはコードではなく定義として管理される。既存の実行基盤が扱える判断の形式の範囲では、Judgement Harness を変更せずにJPを追加・更新できる。形式が合わない場合は、実行基盤の見直しを要する。
 
 ## 4.2 目的
 
@@ -1122,4 +1122,4 @@ Learning Cycle
 | v1.5 | Judgement Injection / JP共有構造 / Judgement Harness実装検証 |
 | v1.6 | 判断実行 + 学習アーキテクチャへ拡張 / resolve_jp削除 / JJ形成 / AI支援・再現・委譲段階の反映 / Judgement Slice Implementation・Operational Bridgeを別文書（06a_judgement_slice_implementation.md）として定義 |
 | v1.7 | Phase5 ImplementationとJudgement Slice Implementationを統合 / 06a_judgement_slice_implementation.mdを廃止 / Judgement Slice ImplementationをPhase5内の実装パターンとして整理 / Operational BridgeをPhase5内に統合 / Learning Cycle名称をCore v1.7（Judgement Material Learning・Judgement Reproduction Learning・Judgement Delegation）へ統一 / 判断材料をData Sourcesへ、Condition・PerspectiveをConditions・Perspectivesへ用語統一 / Thresholdを正式概念から除外 / Core v1.7・README v1.7との整合 / Judgement Sliceのタスク・実行フロー設計をStep3に追加し、実装順序をStep1〜9へ整理 / execute_jpと前後タスクの境界、取得失敗・材料欠損の記録、タスク実行状況と判断状態の分離を明文化 / 最小実装・基本フロー・成功条件・失敗例への反映 / Proposalの具体構造と実装上の名称・保存先の対応を補足（v1.7の明文化） |
-| v1.7.1 | Implementation Planning（実装計画）をPhase5最初の活動として定義 / Step1〜3で対象・材料・タスクを具体化し、Step4の前に実装範囲・段階実装・見積もり・投資判断を整理する構成へ更新 / Phase2の引き渡しメモ、既存運用との橋渡し、計画見直し、成功条件・失敗例との接続を明記 / Step1〜9の番号は維持 |
+| v1.7.1 | Implementation Planning（実装計画）をPhase5最初の活動として定義 / Step1〜3で対象・材料・タスクを具体化し、Step4の前に実装範囲・段階実装・見積もり・投資判断を整理する構成へ更新 / Phase2の引き渡しメモ、既存運用との橋渡し、計画見直し、成功条件・失敗例との接続を明記 / Step1〜9の番号は維持 / 4.1のJudgement Harnessの定義に、基盤を変更せずにJPを追加・更新できる範囲の限定を追記 |
