@@ -5,7 +5,7 @@
 > 英語版：  
 > <https://github.com/judgement-driven/Judgement-Driven-Architecture-EN>
 >
-> 判断を残す。組織が賢くなる。  
+> 業務を、判断から捉え直す。  
 > 企業はデータではなく「判断」で動いている。
 
 ---
